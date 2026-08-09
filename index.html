@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print3D | חנות מוצרי תלת־ממד</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Print<span>3D</span></div>
+
+    <nav>
+        <a href="#home">בית</a>
+        <a href="#products">מוצרים</a>
+        <a href="#contact">צור קשר</a>
+    </nav>
+
+    <button class="cart-button" onclick="openCart()">
+        🛒 עגלה
+        <span id="cartCount">0</span>
+    </button>
+</header>
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <p class="small-title">PRINTED WITH PASSION</p>
+
+        <h1>
+            מוצרים מגניבים
+            <br>
+            <span>בהדפסת תלת־ממד</span>
+        </h1>
+
+        <p>
+            פידג'טים, מחזיקי מפתחות, מעמדים,
+            מוצרים לשולחן ועוד.
+        </p>
+
+        <button class="hero-button" onclick="goToProducts()">
+            🛍️ לכל המוצרים
+        </button>
+    </div>
+</section>
+
+<section class="products-section" id="products">
+
+    <h2>המוצרים שלנו</h2>
+
+    <p class="section-description">
+        מצאו את המוצר המושלם עבורכם
+    </p>
+
+    <div class="controls">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="🔎 חפש מוצר..."
+            oninput="searchProducts()"
+        >
+
+        <div class="categories">
+            <button class="category active" onclick="filterProducts('all', this)">
+                הכול
+            </button>
+
+            <button class="category" onclick="filterProducts('fidget', this)">
+                🌀 פידג'טים
+            </button>
+
+            <button class="category" onclick="filterProducts('keychain', this)">
+                🔑 מחזיקי מפתחות
+            </button>
+
+            <button class="category" onclick="filterProducts('phone', this)">
+                📱 מעמדים
+            </button>
+
+            <button class="category" onclick="filterProducts('room', this)">
+                🏠 לחדר
+            </button>
+        </div>
+
+    </div>
+
+    <div id="productsGrid" class="products-grid"></div>
+
+</section>
+
+<section class="contact-section" id="contact">
+
+    <div class="contact-box">
+
+        <h2>📩 רוצים להזמין?</h2>
+
+        <p>
+            מלאו את הפרטים וניצור איתכם קשר
+        </p>
+
+        <form id="orderForm">
+
+            <input
+                type="text"
+                id="customerName"
+                placeholder="שם מלא"
+                required
+            >
+
+            <input
+                type="tel"
+                id="customerPhone"
+                placeholder="מספר טלפון"
+                required
+            >
+
+            <textarea
+                id="customerMessage"
+                placeholder="מה תרצו להזמין?"
+                required
+            ></textarea>
+
+            <button type="submit">
+                שליחת הזמנה
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+<footer>
+    <div class="logo">Print<span>3D</span></div>
+    <p>© 2026 Print3D — כל הזכויות שמורות</p>
+</footer>
+
+<!-- CART -->
+
+<div id="cartOverlay" onclick="closeCart()"></div>
+
+<aside id="cart">
+
+    <div class="cart-header">
+
+        <h2>🛒 העגלה שלי</h2>
+
+        <button onclick="closeCart()">✕</button>
+
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-bottom">
+
+        <div class="cart-total">
+            סה״כ:
+            <strong>₪<span id="cartTotal">0</span></strong>
+        </div>
+
+        <button class="checkout-button" onclick="checkout()">
+            📩 המשך להזמנה
+        </button>
+
+    </div>
+
+</aside>
+
+<script src="script.js"></script>
+
+</body>
+</html>
