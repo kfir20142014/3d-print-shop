@@ -1,18 +1,18 @@
 const products = [
     // FIDGETS
-    { id: 1, name: "MINI Twist & Turn Fidget", category: "fidget", price: 5, image: "images/1.jpg" },
+    { id: 1, name: "MINI Twist & Turn Fidget", category: "fidget", price: 8, image: "images/1.jpg" },
     { id: 2, name: "Tiny 4 Function Fidget", category: "fidget", price: 4, image: "images/2.jpg" },
     { id: 3, name: "MIO Fidget Ring", category: "fidget", price: 13, image: "images/3.jpg" },
     { id: 4, name: "Twist & Turn Fidget", category: "fidget", price: 10, image: "images/4.jpg" },
-    { id: 5, name: "Musical Fidget Lava Chicken song", category: "fidget", price: 10, image: "images/5.jpg" },
+    { id: 5, name: "Musical Fidget Lava Chicken song", category: "fidget", price: 30, image: "images/5.jpg" },
     { id: 6, name: "Vortex Spiral small", category: "fidget", price: 10, image: "images/6.jpg" },
-    { id: 7, name: "Sturdy Infinity Cube", category: "fidget", price: 10, image: "images/7.jpg" },
+    { id: 7, name: "Sturdy Infinity Cube", category: "fidget", price: 11, image: "images/7.jpg" },
     { id: 8, name: "Triple Helix Puzzle", category: "fidget", price: 15, image: "images/8.jpg" },
-    { id: 9, name: "Ice Cream Fidget", category: "fidget", price: 9, image: "images/9.jpg" },
+    { id: 9, name: "Ice Cream Fidget", category: "fidget", price: 13, image: "images/9.jpg" },
     { id: 10, name: "Vortex Spheres", category: "fidget", price: 5, image: "images/10.jpg" },
     { id: 11, name: "Helix Space Rocket", category: "fidget", price: 15, image: "images/11.jpg" },
-    { id: 12, name: "Impossible Vortex Sphere", category: "fidget", price: 12, image: "images/12.jpg" },
-    { id: 13, name: "Full Hourglass", category: "fidget", price: 11, image: "images/13.jpg" },
+    { id: 12, name: "Impossible Vortex Sphere", category: "fidget", price: 15, image: "images/12.jpg" },
+    { id: 13, name: "Full Hourglass", category: "fidget", price: 13, image: "images/13.jpg" },
     { id: 14, name: "Slinky Fidget", category: "fidget", price: 25, image: "images/14.jpg" },
     { id: 15, name: "Infinity Flip Fidget", category: "fidget", price: 10, image: "images/15.jpg" },
 
@@ -46,7 +46,7 @@ const products = [
     { id: 40, name: "Vertical & Horizontal Stand", category: "phone", price: 22, image: "images/40.jpg" },
 
     // ROOM / DESK
-    { id: 41, name: "Phone Stand With Name we will ask you the name later", category: "room", price: 8, image: "images/41.jpg" },
+    { id: 41, name: "Phone Stand With Name we will ask you the name later", category: "room", price: 22, image: "images/41.jpg" },
     { id: 42, name: "Modular Desk Organizer", category: "room", price: 150, image: "images/42.jpg" },
     { id: 43, name: "Cable Management Clip", category: "room", price: 15, image: "images/43.jpg" },
     { id: 44, name: "Multi-Purpose Cable Organizer 7 holes", category: "room", price: 5, image: "images/44.jpg" },
