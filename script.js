@@ -63,7 +63,7 @@ let currentCategory = "all";
 
 
 // ===============================
-// הצגת המוצרים
+// הצגת מוצרים
 // ===============================
 
 function displayProducts(list = products) {
@@ -78,10 +78,10 @@ function displayProducts(list = products) {
 
         grid.innerHTML = `
             <div style="
-                grid-column: 1 / -1;
-                text-align: center;
-                padding: 60px;
-                font-size: 20px;
+                grid-column:1/-1;
+                text-align:center;
+                padding:50px;
+                font-size:20px;
             ">
                 😕 לא נמצאו מוצרים
             </div>
@@ -101,17 +101,19 @@ function displayProducts(list = products) {
                         src="${product.image}"
                         alt="${product.name}"
                         loading="lazy"
-                        onerror="this.style.display='none'"
                     >
 
                 </div>
 
                 <div class="product-info">
 
-                    <h3>${product.name}</h3>
+                    <h3>
+                        ${product.name}
+                    </h3>
 
                     <p>
-                        מוצר איכותי בהדפסת תלת־ממד
+                        מוצר איכותי
+                        בהדפסת תלת־ממד
                     </p>
 
                     <div class="product-price">
@@ -129,6 +131,7 @@ function displayProducts(list = products) {
 
             </div>
         `;
+
     });
 }
 
@@ -139,33 +142,41 @@ function displayProducts(list = products) {
 
 function searchProducts() {
 
-    const searchInput =
+    const input =
         document.getElementById("searchInput");
 
     const search =
-        searchInput
-            ? searchInput.value.toLowerCase().trim()
+        input
+            ? input.value.toLowerCase().trim()
             : "";
 
     let filtered = products;
 
+
     if (currentCategory !== "all") {
 
-        filtered = filtered.filter(
-            product =>
-                product.category === currentCategory
-        );
+        filtered =
+            filtered.filter(
+                product =>
+                    product.category ===
+                    currentCategory
+            );
+
     }
+
 
     if (search !== "") {
 
-        filtered = filtered.filter(
-            product =>
-                product.name
-                    .toLowerCase()
-                    .includes(search)
-        );
+        filtered =
+            filtered.filter(
+                product =>
+                    product.name
+                        .toLowerCase()
+                        .includes(search)
+            );
+
     }
+
 
     displayProducts(filtered);
 }
@@ -182,12 +193,16 @@ function filterProducts(category, button) {
     document
         .querySelectorAll(".category")
         .forEach(btn => {
+
             btn.classList.remove("active");
+
         });
+
 
     if (button) {
         button.classList.add("active");
     }
+
 
     searchProducts();
 }
@@ -201,16 +216,66 @@ function addToCart(id) {
 
     const product =
         products.find(
-            product => product.id === id
+            product =>
+                product.id === id
         );
 
+
     if (!product) return;
+
 
     cart.push(product);
 
     updateCart();
 
     openCart();
+}
+
+
+// ===============================
+// חישוב סכום מוצרים
+// ===============================
+
+function getProductsTotal() {
+
+    return cart.reduce(
+        (total, product) =>
+            total + product.price,
+        0
+    );
+
+}
+
+
+// ===============================
+// חישוב טיפ
+// ===============================
+
+function getTipPercent() {
+
+    const tip =
+        document.getElementById("cartTip");
+
+    if (!tip) return 0;
+
+    return Number(tip.value);
+}
+
+
+function getTipAmount() {
+
+    const productsTotal =
+        getProductsTotal();
+
+    const tipPercent =
+        getTipPercent();
+
+    return Math.round(
+        productsTotal *
+        tipPercent /
+        100
+    );
+
 }
 
 
@@ -226,14 +291,26 @@ function updateCart() {
     const cartItems =
         document.getElementById("cartItems");
 
-    const cartTotal =
+    const productsTotalElement =
+        document.getElementById("productsTotal");
+
+    const tipTotalElement =
+        document.getElementById("tipTotal");
+
+    const cartTotalElement =
         document.getElementById("cartTotal");
 
+
     if (cartCount) {
-        cartCount.textContent = cart.length;
+
+        cartCount.textContent =
+            cart.length;
+
     }
 
-    if (!cartItems || !cartTotal) return;
+
+    if (!cartItems) return;
+
 
     if (cart.length === 0) {
 
@@ -245,50 +322,86 @@ function updateCart() {
             </div>
         `;
 
-        cartTotal.textContent = "0";
+    } else {
 
-        return;
-    }
+        cartItems.innerHTML = "";
 
-    let total = 0;
 
-    cartItems.innerHTML = "";
+        cart.forEach(
+            (product, index) => {
 
-    cart.forEach((product, index) => {
+                cartItems.innerHTML += `
 
-        total += product.price;
+                    <div class="cart-item">
 
-        cartItems.innerHTML += `
-            <div class="cart-item">
+                        <img
+                            src="${product.image}"
+                            class="cart-item-image"
+                            alt="${product.name}"
+                        >
 
-                <img
-                    src="${product.image}"
-                    class="cart-item-image"
-                    alt="${product.name}"
-                >
+                        <div class="cart-item-info">
 
-                <div class="cart-item-info">
+                            <h4>
+                                ${product.name}
+                            </h4>
 
-                    <h4>${product.name}</h4>
+                            <div class="cart-item-price">
+                                ₪${product.price}
+                            </div>
 
-                    <div class="cart-item-price">
-                        ₪${product.price}
+                        </div>
+
+                        <button
+                            class="remove-button"
+                            onclick="removeFromCart(${index})"
+                        >
+                            ✕
+                        </button>
+
                     </div>
 
-                </div>
+                `;
 
-                <button
-                    class="remove-button"
-                    onclick="removeFromCart(${index})"
-                >
-                    ✕
-                </button>
+            }
+        );
 
-            </div>
-        `;
-    });
+    }
 
-    cartTotal.textContent = total;
+
+    const productsTotal =
+        getProductsTotal();
+
+    const tipAmount =
+        getTipAmount();
+
+    const finalTotal =
+        productsTotal +
+        tipAmount;
+
+
+    if (productsTotalElement) {
+
+        productsTotalElement.textContent =
+            productsTotal;
+
+    }
+
+
+    if (tipTotalElement) {
+
+        tipTotalElement.textContent =
+            tipAmount;
+
+    }
+
+
+    if (cartTotalElement) {
+
+        cartTotalElement.textContent =
+            finalTotal;
+
+    }
 }
 
 
@@ -305,66 +418,58 @@ function removeFromCart(index) {
 
 
 // ===============================
-// פתיחת העגלה
+// פתיחת עגלה
 // ===============================
 
 function openCart() {
 
-    const cartElement =
-        document.getElementById("cart");
+    document
+        .getElementById("cart")
+        .classList.add("open");
 
-    const overlay =
-        document.getElementById("cartOverlay");
+    document
+        .getElementById("cartOverlay")
+        .classList.add("show");
 
-    if (cartElement) {
-        cartElement.classList.add("open");
-    }
-
-    if (overlay) {
-        overlay.classList.add("show");
-    }
 }
 
 
 // ===============================
-// סגירת העגלה
+// סגירת עגלה
 // ===============================
 
 function closeCart() {
 
-    const cartElement =
-        document.getElementById("cart");
+    document
+        .getElementById("cart")
+        .classList.remove("open");
 
-    const overlay =
-        document.getElementById("cartOverlay");
+    document
+        .getElementById("cartOverlay")
+        .classList.remove("show");
 
-    if (cartElement) {
-        cartElement.classList.remove("open");
-    }
-
-    if (overlay) {
-        overlay.classList.remove("show");
-    }
 }
 
 
 // ===============================
-// המשך להזמנה
+// מעבר לטופס הזמנה
 // ===============================
 
 function checkout() {
 
     if (cart.length === 0) {
 
-        alert("העגלה שלך ריקה 🛒");
+        alert(
+            "העגלה שלך ריקה 🛒"
+        );
 
         return;
     }
 
+
     let message =
         "שלום! אני רוצה להזמין:\n\n";
 
-    let total = 0;
 
     cart.forEach(product => {
 
@@ -375,42 +480,80 @@ function checkout() {
             product.price +
             "\n";
 
-        total += product.price;
     });
 
+
+    const productsTotal =
+        getProductsTotal();
+
+    const tipPercent =
+        getTipPercent();
+
+    const tipAmount =
+        getTipAmount();
+
+    const finalTotal =
+        productsTotal +
+        tipAmount;
+
+
     message +=
-        "\n💰 סה״כ: ₪" +
-        total;
+        "\n💵 מחיר מוצרים: ₪" +
+        productsTotal;
+
+
+    if (tipPercent > 0) {
+
+        message +=
+            "\n💝 טיפ (" +
+            tipPercent +
+            "%): ₪" +
+            tipAmount;
+
+    }
+
+
+    message +=
+        "\n\n💰 *סה״כ לתשלום: ₪" +
+        finalTotal +
+        "*";
+
 
     const messageBox =
         document.getElementById(
             "customerMessage"
         );
 
+
     if (messageBox) {
-        messageBox.value = message;
+
+        messageBox.value =
+            message;
+
     }
+
 
     closeCart();
 
-    const contact =
-        document.getElementById("contact");
 
-    if (contact) {
-
-        contact.scrollIntoView({
+    document
+        .getElementById("contact")
+        .scrollIntoView({
             behavior: "smooth"
         });
-    }
+
 }
 
 
 // ===============================
-// שליחת הזמנה ל-WHATSAPP
+// שליחת WhatsApp
 // ===============================
 
 const orderForm =
-    document.getElementById("orderForm");
+    document.getElementById(
+        "orderForm"
+    );
+
 
 if (orderForm) {
 
@@ -420,25 +563,39 @@ if (orderForm) {
 
             event.preventDefault();
 
+
             const name =
                 document
-                    .getElementById("customerName")
+                    .getElementById(
+                        "customerName"
+                    )
                     .value
                     .trim();
+
 
             const phone =
                 document
-                    .getElementById("customerPhone")
+                    .getElementById(
+                        "customerPhone"
+                    )
                     .value
                     .trim();
+
 
             const message =
                 document
-                    .getElementById("customerMessage")
+                    .getElementById(
+                        "customerMessage"
+                    )
                     .value
                     .trim();
 
-            if (!name || !phone || !message) {
+
+            if (
+                !name ||
+                !phone ||
+                !message
+            ) {
 
                 alert(
                     "נא למלא את כל הפרטים."
@@ -447,20 +604,26 @@ if (orderForm) {
                 return;
             }
 
-            // מספר ה-WhatsApp שלך
+
             const whatsappNumber =
                 "972509996873";
 
+
             const whatsappMessage =
                 "🛍️ *הזמנה חדשה מ-Print3D*\n\n" +
+
                 "👤 *שם:* " +
                 name +
                 "\n" +
+
                 "📱 *טלפון:* " +
                 phone +
                 "\n\n" +
-                "📦 *פרטי ההזמנה:*\n" +
+
+                "📦 *הזמנה:*\n" +
+
                 message;
+
 
             const whatsappURL =
                 "https://wa.me/" +
@@ -470,12 +633,15 @@ if (orderForm) {
                     whatsappMessage
                 );
 
+
             window.open(
                 whatsappURL,
                 "_blank"
             );
+
         }
     );
+
 }
 
 
@@ -485,15 +651,12 @@ if (orderForm) {
 
 function goToProducts() {
 
-    const productsSection =
-        document.getElementById("products");
-
-    if (productsSection) {
-
-        productsSection.scrollIntoView({
+    document
+        .getElementById("products")
+        .scrollIntoView({
             behavior: "smooth"
         });
-    }
+
 }
 
 
@@ -502,4 +665,5 @@ function goToProducts() {
 // ===============================
 
 displayProducts();
+
 updateCart();
