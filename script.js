@@ -56,7 +56,6 @@ const products = [
     { id: 48, name: "Pencil Desk Organizer", category: "room", price: 35, image: "images/48.jpg" },
     { id: 49, name: "Hex Desk Organizer", category: "room", price: 10, image: "images/49.jpg" },
     { id: 50, name: "Spinning Desk Organizer", category: "room", price: 100, image: "images/50.jpg" }
-    { id: 51, name: "hex fidget", category: "fidget", price: 10, image: "images/51.jpg" }
 ];
 
 let cart = [];
