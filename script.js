@@ -58,8 +58,15 @@ const products = [
     { id: 50, name: "Spinning Desk Organizer", category: "room", price: 100, image: "images/50.jpg" }
 ];
 
+const coupons = {
+    "5839210476": 100
+};
+
+const whatsappNumber = "972509996873";
+
 let cart = [];
 let currentCategory = "all";
+let appliedCoupon = null;
 
 
 // ===============================
@@ -231,10 +238,10 @@ function addToCart(id) {
     openCart();
 }
 
-
-// ===============================
-// חישוב סכום מוצרים
-// ===============================
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCart();
+}
 
 function getProductsTotal() {
 
@@ -264,18 +271,67 @@ function getTipPercent() {
 
 function getTipAmount() {
 
-    const productsTotal =
+    const subtotal =
         getProductsTotal();
 
     const tipPercent =
         getTipPercent();
 
     return Math.round(
-        productsTotal *
+        subtotal *
         tipPercent /
         100
     );
 
+}
+
+// ===============================
+// COUPON
+// ===============================
+
+function applyCoupon() {
+    const input =
+        document.getElementById("couponInput");
+
+    const message =
+        document.getElementById("couponMessage");
+
+    if (!input) return;
+    const code =
+        input.value.trim();
+
+    if (coupons[code] !== undefined) {✅
+        appliedCoupons = {
+            code: code,
+            discount: coupons[code]
+        };
+
+        if (message) {
+            message.innerHTML =
++ " הקופון הופעל!✅"
+            coupons[code] +
+;"הנחה %"
+        }
+
+                                     } else {
+        appliedCoupon = null
+        if (message) {
+            message.innerHTML=
+;"קוד קופון לא תקין❌"
+        }
+    }
+
+    updateCart();
+}
+
+
+const subtotal =
+    getProductsTotal();
+
+return Math.round(
+    subtotal *
+    appliedCoupon.discount /
+    );
 }
 
 
@@ -296,6 +352,9 @@ function updateCart() {
 
     const tipTotalElement =
         document.getElementById("tipTotal");
+
+    const discountElement =
+        document.getElementById("couponDiscount");
 
     const cartTotalElement =
         document.getElementById("cartTotal");
@@ -369,15 +428,22 @@ function updateCart() {
     }
 
 
-    const productsTotal =
+    const subtotal =
         getProductsTotal();
 
-    const tipAmount =
+    const discount =
+        getCouponDiscount();
+
+    const tip =
         getTipAmount();
 
-    const finalTotal =
-        productsTotal +
-        tipAmount;
+    const total =
+        Math.max(
+            0,
+            subtotal -
+            discount +
+            tip
+            );
 
 
     if (productsTotalElement) {
@@ -385,6 +451,12 @@ function updateCart() {
         productsTotalElement.textContent =
             productsTotal;
 
+    }
+
+
+    if (discountElement) {
+        discountElement.textContent=
+            discount;
     }
 
 
@@ -404,51 +476,41 @@ function updateCart() {
     }
 }
 
-
 // ===============================
-// הסרת מוצר
-// ===============================
-
-function removeFromCart(index) {
-
-    cart.splice(index, 1);
-
-    updateCart();
-}
-
-
-// ===============================
-// פתיחת עגלה
+// פתיחת עגלה וסגירה
 // ===============================
 
 function openCart() {
 
-    document
-        .getElementById("cart")
-        .classList.add("open");
+    const cartElement =
+        document.getElementById("cart");
 
-    document
-        .getElementById("cartOverlay")
-        .classList.add("show");
+    const overlay =
+        document.getElementById("cartOverlay");
 
-}
+    if (cartElement) {
+        cartElement.classList.add("open");
 
-
-// ===============================
-// סגירת עגלה
-// ===============================
+    if (overlay) {
+        overlay.classList.add("show");
+    }
+    }
 
 function closeCart() {
 
-    document
-        .getElementById("cart")
-        .classList.remove("open");
+    const cartElement =
+        document.getElementById("cart");
 
-    document
-        .getElementById("cartOverlay")
-        .classList.remove("show");
+    const overlay =
+        document.getElementById("cartOverlay");
 
+    if (cartElement) {
+        cartElement.classList.remove("open");
+
+        if (overlay) {
+        overlay.classList.remove("show");
 }
+    }
 
 
 // ===============================
@@ -483,39 +545,53 @@ function checkout() {
     });
 
 
-    const productsTotal =
+    const subtotal =
         getProductsTotal();
 
-    const tipPercent =
+    const discount =
+        getCouponDiscount();
+
+    const tip =
         getTipPercent();
 
     const tipAmount =
         getTipAmount();
 
-    const finalTotal =
-        productsTotal +
-        tipAmount;
+    const total =
+        Math.max(
+            0,
+            subtotal -
+            discount +
+            tip
+            );
 
 
     message +=
         "\n💵 מחיר מוצרים: ₪" +
-        productsTotal;
+        subtotal;
 
 
-    if (tipPercent > 0) {
+    if (appliedCoupon) {
+        message +=
+            "\n קופון 🎟️: " +
+            appliedCoupon.code+
+            "\n💸 הנחה: -₪"+
+            discount;
+    }
+
+
+    if (tip > 0) {
 
         message +=
-            "\n💝 טיפ (" +
-            tipPercent +
-            "%): ₪" +
-            tipAmount;
+            "\n💝 טיפ ₪" +
+            tip;
 
     }
 
 
     message +=
-        "\n\n💰 *סה״כ לתשלום: ₪" +
-        finalTotal +
+        "\n\n💰 *סה״כ: ₪" +
+        total +
         "*";
 
 
@@ -535,13 +611,15 @@ function checkout() {
 
     closeCart();
 
+const contact =
+    document.getElementById("contact");
 
-    document
-        .getElementById("contact")
-        .scrollIntoView({
+    if (contact) {
+
+        contact.scrollIntoView({
             behavior: "smooth"
         });
-
+    }
 }
 
 
@@ -605,10 +683,6 @@ if (orderForm) {
             }
 
 
-            const whatsappNumber =
-                "972509996873";
-
-
             const whatsappMessage =
                 "🛍️ *הזמנה חדשה מ-Print3D*\n\n" +
 
@@ -651,12 +725,15 @@ if (orderForm) {
 
 function goToProducts() {
 
-    document
-        .getElementById("products")
-        .scrollIntoView({
+    const productsSection =
+        document.getElementById(
+            "products"
+            );
+    if (productsSection) {
+        productsSection.scrollIntoView({
             behavior: "smooth"
         });
-
+    }
 }
 
 
