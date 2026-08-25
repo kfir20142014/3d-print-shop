@@ -293,6 +293,27 @@
 
         </div>
 
+        <div class="coupon-box">
+            <label for="couponInput">
+קוד קופון🎟️
+            </label>
+            <div class="coupon-row">
+                <input
+                    type="text"
+                    id="couponInput"
+                    placeholder="קוד של 10 ספרות"
+                    maxlength="10"
+                    inputmode="numeric"
+                >
+                <button
+                    type="button"
+                    onclick="applyCoupon()"
+                >
+הפעל    
+                </button>
+            </div>
+            <div id="couponMessage"></div>
+        </div>
 
         <div class="cart-summary">
 
@@ -307,6 +328,14 @@
                 טיפ:
                 <span>
                     ₪<span id="tipTotal">0</span>
+                </span>
+            </div>
+
+            <div>
+                <span>קופון:</span>
+
+                <span>
+                    -₪<span id="couponDiscount">0</span>
                 </span>
             </div>
 
