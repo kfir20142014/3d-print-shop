@@ -1,1 +1,199 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>מוצר | Print3D</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        Print<span>3D</span>
+    </div>
+
+    <nav>
+
+        <a href="index.html">
+            בית
+        </a>
+
+        <a href="index.html#products">
+            מוצרים
+        </a>
+
+    </nav>
+
+    <button
+        class="cart-button"
+        onclick="openCart()"
+    >
+        🛒 עגלה
+        <span id="cartCount">0</span>
+    </button>
+
+</header>
+
+
+<main class="single-product">
+
+    <a
+        href="index.html#products"
+        class="back-button"
+    >
+        ← חזרה למוצרים
+    </a>
+
+
+    <div id="productDetails"></div>
+
+</main>
+
+
+<div
+    id="cartOverlay"
+    onclick="closeCart()"
+></div>
+
+
+<aside id="cart">
+
+    <div class="cart-header">
+
+        <h2>
+            🛒 העגלה שלי
+        </h2>
+
+        <button onclick="closeCart()">
+            ✕
+        </button>
+
+    </div>
+
+
+    <div id="cartItems"></div>
+
+
+    <div class="cart-bottom">
+
+        <div class="tip-cart">
+
+            <label>
+                💝 טיפ
+            </label>
+
+            <select
+                id="cartTip"
+                onchange="updateCart()"
+            >
+
+                <option value="0">
+                    ללא טיפ
+                </option>
+
+                <option value="5">
+                    5%
+                </option>
+
+                <option value="10">
+                    10%
+                </option>
+
+                <option value="15">
+                    15%
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="coupon-box">
+
+            <label>
+                🎟️ קוד קופון
+            </label>
+
+            <div class="coupon-row">
+
+                <input
+                    type="text"
+                    id="couponInput"
+                    placeholder="10 ספרות"
+                    maxlength="10"
+                    inputmode="numeric"
+                >
+
+                <button onclick="applyCoupon()">
+                    הפעל
+                </button>
+
+            </div>
+
+            <div id="couponMessage"></div>
+
+        </div>
+
+
+        <div class="cart-summary">
+
+            <div>
+                <span>מוצרים:</span>
+                <span>
+                    ₪<span id="productsTotal">0</span>
+                </span>
+            </div>
+
+            <div>
+                <span>קופון:</span>
+                <span>
+                    -₪<span id="couponDiscount">0</span>
+                </span>
+            </div>
+
+            <div>
+                <span>טיפ:</span>
+                <span>
+                    ₪<span id="tipTotal">0</span>
+                </span>
+            </div>
+
+            <div class="final-total">
+                <span>סה״כ:</span>
+                <strong>
+                    ₪<span id="cartTotal">0</span>
+                </strong>
+            </div>
+
+        </div>
+
+
+        <button
+            class="checkout-button"
+            onclick="checkout()"
+        >
+            📩 המשך להזמנה
+        </button>
+
+    </div>
+
+</aside>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
