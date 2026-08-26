@@ -2,7 +2,6 @@
 <html lang="he" dir="rtl">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -13,33 +12,32 @@
     <title>מוצר | Print3D</title>
 
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
-<header>
+<header class="header">
 
-    <div class="logo">
+    <a href="index.html" class="logo">
         Print<span>3D</span>
-    </div>
+    </a>
 
     <nav>
         <a href="index.html">בית</a>
         <a href="index.html#products">מוצרים</a>
     </nav>
 
-    <button id="cartButton" class="cart-button">
-        🛒 עגלה <b id="cartCount">0</b>
+    <button id="openCart" class="cart-btn">
+        🛒 <span id="cartCount">0</span>
     </button>
 
 </header>
 
 
-<main class="product-page-container">
+<main class="product-page">
 
     <a href="index.html#products" class="back">
-        ← חזרה למוצרים
+        ← חזרה לחנות
     </a>
 
     <div id="productDetails"></div>
@@ -52,23 +50,25 @@
 
 <aside id="cart">
 
-    <div class="cart-header">
+    <div class="cart-top">
 
-        <h2>🛒 העגלה</h2>
+        <h2>🛒 העגלה שלי</h2>
 
         <button id="closeCart">✕</button>
 
     </div>
 
+
     <div id="cartItems" class="cart-items"></div>
+
 
     <div class="cart-bottom">
 
-        <div class="tip-row">
+        <div class="tip-line">
 
             <span>💝 טיפ</span>
 
-            <select id="tipSelect">
+            <select id="tip">
                 <option value="0">ללא טיפ</option>
                 <option value="5">5%</option>
                 <option value="10">10%</option>
@@ -78,49 +78,52 @@
 
         </div>
 
-        <div class="coupon">
+
+        <div class="coupon-line">
 
             <input
-                id="couponInput"
+                id="coupon"
                 type="text"
-                inputmode="numeric"
                 maxlength="10"
+                inputmode="numeric"
                 placeholder="קוד קופון"
             >
 
-            <button id="couponButton">
-                הפעל
+            <button id="applyCoupon">
+                החל
             </button>
 
         </div>
 
         <div id="couponMessage"></div>
 
-        <div class="summary">
+
+        <div class="prices">
 
             <div>
                 <span>מחיר מוצרים</span>
-                <span>₪<b id="subtotal">0</b></span>
+                <strong>₪<span id="subtotal">0</span></strong>
             </div>
 
             <div>
                 <span>הנחה</span>
-                <span>₪<b id="discount">0</b></span>
+                <strong>₪<span id="discount">0</span></strong>
             </div>
 
             <div>
                 <span>טיפ</span>
-                <span>₪<b id="tipAmount">0</b></span>
+                <strong>₪<span id="tipAmount">0</span></strong>
             </div>
 
-            <div class="total">
+            <div class="grand-total">
                 <span>סה״כ</span>
-                <span>₪<b id="total">0</b></span>
+                <strong>₪<span id="total">0</span></strong>
             </div>
 
         </div>
 
-        <button id="checkoutButton" class="checkout-button">
+
+        <button id="checkout" class="checkout-btn">
             המשך להזמנה
         </button>
 
