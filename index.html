@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Print3D | חנות מוצרי תלת־ממד</title>
+    <title>Print3D | חנות תלת־ממד</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -20,7 +21,7 @@
     <nav>
         <a href="#home">בית</a>
         <a href="#products">מוצרים</a>
-        <a href="#contact">צור קשר</a>
+        <a href="#contact">הזמנה</a>
     </nav>
 
     <button class="cart-button" onclick="openCart()">
@@ -30,8 +31,6 @@
 
 </header>
 
-
-<!-- HERO -->
 
 <section class="hero" id="home">
 
@@ -63,8 +62,6 @@
 
 </section>
 
-
-<!-- PRODUCTS -->
 
 <section class="products-section" id="products">
 
@@ -135,18 +132,18 @@
 </section>
 
 
-<!-- CONTACT / ORDER -->
-
-<section class="contact-section" id="contact">
+<section
+    class="contact-section"
+    id="contact"
+>
 
     <div class="contact-box">
 
         <h2>📩 רוצים להזמין?</h2>
 
         <p>
-            מלאו את הפרטים וניצור איתכם קשר
+            מלאו את הפרטים ונשלח את ההזמנה ל־WhatsApp.
         </p>
-
 
         <form id="orderForm">
 
@@ -157,7 +154,6 @@
                 required
             >
 
-
             <input
                 type="tel"
                 id="customerPhone"
@@ -165,47 +161,14 @@
                 required
             >
 
-
             <textarea
                 id="customerMessage"
-                placeholder="מה תרצו להזמין?"
+                placeholder="פרטי ההזמנה"
                 required
             ></textarea>
 
-
-            <!-- TIP -->
-
-            <div class="tip-box">
-
-                <label for="tipSelect">
-                    💝 רוצים להשאיר טיפ?
-                </label>
-
-                <select id="tipSelect">
-
-                    <option value="0">
-                        ללא טיפ
-                    </option>
-
-                    <option value="5">
-                        5%
-                    </option>
-
-                    <option value="10">
-                        10%
-                    </option>
-
-                    <option value="15">
-                        15%
-                    </option>
-
-                </select>
-
-            </div>
-
-
             <button type="submit">
-                📱 שליחת הזמנה ב-WhatsApp
+                📱 שליחת הזמנה ב־WhatsApp
             </button>
 
         </form>
@@ -214,8 +177,6 @@
 
 </section>
 
-
-<!-- FOOTER -->
 
 <footer>
 
@@ -230,23 +191,17 @@
 </footer>
 
 
-<!-- CART OVERLAY -->
-
 <div
     id="cartOverlay"
     onclick="closeCart()"
 ></div>
 
 
-<!-- CART -->
-
 <aside id="cart">
 
     <div class="cart-header">
 
-        <h2>
-            🛒 העגלה שלי
-        </h2>
+        <h2>🛒 העגלה שלי</h2>
 
         <button onclick="closeCart()">
             ✕
@@ -260,7 +215,8 @@
 
     <div class="cart-bottom">
 
-        <!-- TIP IN CART -->
+
+        <!-- TIP -->
 
         <div class="tip-cart">
 
@@ -293,43 +249,51 @@
 
         </div>
 
+
+        <!-- COUPON -->
+
         <div class="coupon-box">
+
             <label for="couponInput">
-קוד קופון🎟️
+                🎟️ קוד קופון
             </label>
+
             <div class="coupon-row">
+
                 <input
                     type="text"
                     id="couponInput"
-                    placeholder="קוד של 10 ספרות"
+                    placeholder="10 ספרות"
                     maxlength="10"
                     inputmode="numeric"
                 >
+
                 <button
                     type="button"
                     onclick="applyCoupon()"
                 >
-הפעל    
+                    הפעל
                 </button>
+
             </div>
+
             <div id="couponMessage"></div>
+
         </div>
+
+
+        <!-- SUMMARY -->
 
         <div class="cart-summary">
 
             <div>
-                מוצרים:
+                <span>מוצרים:</span>
+
                 <span>
                     ₪<span id="productsTotal">0</span>
                 </span>
             </div>
 
-            <div>
-                טיפ:
-                <span>
-                    ₪<span id="tipTotal">0</span>
-                </span>
-            </div>
 
             <div>
                 <span>קופון:</span>
@@ -339,11 +303,24 @@
                 </span>
             </div>
 
+
+            <div>
+                <span>טיפ:</span>
+
+                <span>
+                    ₪<span id="tipTotal">0</span>
+                </span>
+            </div>
+
+
             <div class="final-total">
-                סה״כ:
+
+                <span>סה״כ:</span>
+
                 <strong>
                     ₪<span id="cartTotal">0</span>
                 </strong>
+
             </div>
 
         </div>
@@ -361,6 +338,10 @@
 </aside>
 
 
+<!-- קודם טוענים את המוצרים -->
+<script src="products.js"></script>
+
+<!-- אחר כך את הלוגיקה -->
 <script src="script.js"></script>
 
 </body>
