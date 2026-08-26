@@ -55,7 +55,7 @@ const products = [
     { id: 47, name: "Under-Desk Drawer", category: "room", price: 85, image: "images/47.jpg" },
     { id: 48, name: "Pencil Desk Organizer", category: "room", price: 35, image: "images/48.jpg" },
     { id: 49, name: "Hex Desk Organizer", category: "room", price: 10, image: "images/49.jpg" },
-    { id: 50, name: "Spinning Desk Organizer", category: "room", price: 100, image: "images/50.jpg },
+    { id: 50, name: "Spinning Desk Organizer", category: "room", price: 100, image: "images/50.jpg" },
     ];
 
 // ==========================================
