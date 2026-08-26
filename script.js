@@ -64,6 +64,7 @@ const products = [
 
 const coupons = {
     "5839210476": 100
+    "1747232083": 10
 };
 
 const whatsappNumber = "972509996873";
