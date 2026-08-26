@@ -3,16 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Print3D</title>
-
+    <title>Print3D | חנות תלת־ממד</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
-    <div class="logo">Print<span>3D</span></div>
+<header class="header">
+    <a href="index.html" class="logo">Print<span>3D</span></a>
 
     <nav>
         <a href="#home">בית</a>
@@ -20,44 +18,50 @@
         <a href="#order">הזמנה</a>
     </nav>
 
-    <button id="cartButton" class="cart-button">
-        🛒 עגלה <b id="cartCount">0</b>
+    <button id="openCart" class="cart-btn">
+        🛒 <span id="cartCount">0</span>
     </button>
 </header>
 
 
 <section id="home" class="hero">
-    <div>
-        <div class="small-title">PRINT3D</div>
+
+    <div class="hero-content">
+
+        <div class="badge">✨ הדפסות תלת־ממד</div>
 
         <h1>
-            מוצרים מגניבים
-            <span>בהדפסת תלת־ממד</span>
+            דברים מגניבים
+            <span>בהדפסת 3D</span>
         </h1>
 
         <p>
-            בחרו מוצר, הוסיפו לעגלה ושלחו את ההזמנה ישירות אלינו.
+            מצאו את המוצר שאתם אוהבים,
+            הוסיפו לעגלה ושלחו הזמנה בקלות.
         </p>
 
-        <a href="#products" class="hero-button">
-            למוצרים
+        <a href="#products" class="hero-btn">
+            🛍️ לכל המוצרים
         </a>
+
     </div>
+
 </section>
 
 
 <section id="products" class="products-section">
 
-    <h2>המוצרים שלנו</h2>
+    <div class="section-title">
+        <div class="badge">החנות שלנו</div>
+        <h2>כל המוצרים</h2>
+        <p>בחרו מוצר והוסיפו אותו לעגלה</p>
+    </div>
 
-    <p class="section-description">
-        מצאו את המוצר שאתם מחפשים
-    </p>
 
-    <div class="controls">
+    <div class="search-area">
 
         <input
-            id="searchInput"
+            id="search"
             type="search"
             placeholder="🔎 חפש מוצר..."
         >
@@ -66,39 +70,42 @@
 
     </div>
 
-    <div id="productsGrid" class="products-grid"></div>
+
+    <div id="products" class="products-grid"></div>
 
 </section>
 
 
 <section id="order" class="order-section">
 
-    <div class="order-box">
+    <div class="order-card">
 
-        <h2>📱 שליחת הזמנה</h2>
+        <div class="badge">📱 הזמנה</div>
+
+        <h2>שליחת הזמנה</h2>
 
         <p>
-            לאחר מילוי הפרטים תוכלו לשלוח את ההזמנה ב־WhatsApp.
+            מלאו את הפרטים וההזמנה תיפתח ב־WhatsApp.
         </p>
 
         <input
-            id="customerName"
+            id="name"
             type="text"
-            placeholder="שם"
+            placeholder="השם שלך"
         >
 
         <input
-            id="customerPhone"
+            id="phone"
             type="tel"
-            placeholder="טלפון"
+            placeholder="מספר טלפון"
         >
 
         <textarea
-            id="customerMessage"
-            placeholder="הערה להזמנה"
+            id="note"
+            placeholder="הערה להזמנה (לא חובה)"
         ></textarea>
 
-        <button id="sendOrderButton" class="whatsapp-button">
+        <button id="sendWhatsApp" class="whatsapp-btn">
             📱 שלח הזמנה ב־WhatsApp
         </button>
 
@@ -109,25 +116,28 @@
 
 <div id="overlay"></div>
 
+
 <aside id="cart">
 
-    <div class="cart-header">
+    <div class="cart-top">
 
-        <h2>🛒 העגלה</h2>
+        <h2>🛒 העגלה שלי</h2>
 
         <button id="closeCart">✕</button>
 
     </div>
 
+
     <div id="cartItems" class="cart-items"></div>
+
 
     <div class="cart-bottom">
 
-        <div class="tip-row">
+        <div class="tip-line">
 
             <span>💝 טיפ</span>
 
-            <select id="tipSelect">
+            <select id="tip">
                 <option value="0">ללא טיפ</option>
                 <option value="5">5%</option>
                 <option value="10">10%</option>
@@ -138,18 +148,18 @@
         </div>
 
 
-        <div class="coupon">
+        <div class="coupon-line">
 
             <input
-                id="couponInput"
+                id="coupon"
                 type="text"
-                inputmode="numeric"
                 maxlength="10"
+                inputmode="numeric"
                 placeholder="קוד קופון"
             >
 
-            <button id="couponButton">
-                הפעל
+            <button id="applyCoupon">
+                החל
             </button>
 
         </div>
@@ -157,31 +167,32 @@
         <div id="couponMessage"></div>
 
 
-        <div class="summary">
+        <div class="prices">
 
             <div>
                 <span>מחיר מוצרים</span>
-                <span>₪<b id="subtotal">0</b></span>
+                <strong>₪<span id="subtotal">0</span></strong>
             </div>
 
             <div>
                 <span>הנחה</span>
-                <span>₪<b id="discount">0</b></span>
+                <strong>₪<span id="discount">0</span></strong>
             </div>
 
             <div>
                 <span>טיפ</span>
-                <span>₪<b id="tipAmount">0</b></span>
+                <strong>₪<span id="tipAmount">0</span></strong>
             </div>
 
-            <div class="total">
+            <div class="grand-total">
                 <span>סה״כ</span>
-                <span>₪<b id="total">0</b></span>
+                <strong>₪<span id="total">0</span></strong>
             </div>
 
         </div>
 
-        <button id="checkoutButton" class="checkout-button">
+
+        <button id="checkout" class="checkout-btn">
             המשך להזמנה
         </button>
 
