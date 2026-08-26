@@ -2,6 +2,7 @@
 <html lang="he" dir="rtl">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -11,14 +12,26 @@
 
     <title>Print3D | חנות תלת מימד</title>
 
+    <!-- FAVICON -->
+    <link
+        rel="icon"
+        type="image/png"
+        href="favicon.png"
+    >
+
+    <!-- CSS -->
     <link
         rel="stylesheet"
         href="style.css"
     >
-    <link rel="icon" type="image/png" href="favicon.png">
+
 </head>
 
+
 <body>
+
+
+<!-- ================= HEADER ================= -->
 
 <header>
 
@@ -26,24 +39,42 @@
         Print<span>3D</span>
     </div>
 
+
     <nav>
-        <a href="#home">בית</a>
-        <a href="#products">מוצרים</a>
-        <a href="#contact">צור קשר</a>
+
+        <a href="#home">
+            בית
+        </a>
+
+        <a href="#products">
+            מוצרים
+        </a>
+
+        <a href="#contact">
+            צור קשר
+        </a>
+
     </nav>
+
 
     <button
         class="cart-button"
         onclick="openCart()"
     >
+
         🛒 עגלה
-        <span id="cartCount">0</span>
+
+        <span id="cartCount">
+            0
+        </span>
+
     </button>
 
 </header>
 
 
-<!-- HERO -->
+
+<!-- ================= HERO ================= -->
 
 <section
     id="home"
@@ -53,24 +84,36 @@
     <div class="hero-content">
 
         <div class="small-title">
-            PRINTED WITH 3D
+            PRINT3D
         </div>
 
+
         <h1>
+
             מוצרים מגניבים
-            <span>בהדפסת תלת־ממד</span>
+
+            <span>
+                בהדפסת תלת־ממד
+            </span>
+
         </h1>
 
+
         <p>
+
             פידג'טים, מחזיקי מפתחות,
-            מעמדים לטלפון ומוצרים לחדר.
+            מעמדים לטלפון ומוצרים מגניבים לחדר.
+
         </p>
+
 
         <button
             class="hero-button"
             onclick="goToProducts()"
         >
+
             🛍️ לכל המוצרים
+
         </button>
 
     </div>
@@ -78,29 +121,41 @@
 </section>
 
 
-<!-- PRODUCTS -->
+
+<!-- ================= PRODUCTS ================= -->
 
 <section
     id="products"
     class="products-section"
 >
 
-    <h2>המוצרים שלנו</h2>
+    <h2>
+        המוצרים שלנו
+    </h2>
+
 
     <p class="section-description">
-        בחר מוצר והוסף אותו לעגלה
+
+        מצא את המוצר שאתה רוצה והוסף אותו לעגלה
+
     </p>
 
+
+
+    <!-- SEARCH -->
 
     <div class="controls">
 
         <input
-            type="text"
             id="searchInput"
+            type="search"
             placeholder="🔎 חפש מוצר..."
             oninput="searchProducts()"
         >
 
+
+
+        <!-- CATEGORIES -->
 
         <div class="categories">
 
@@ -111,12 +166,14 @@
                 הכל
             </button>
 
+
             <button
                 class="category"
                 onclick="filterProducts('fidget', this)"
             >
                 פידג'טים
             </button>
+
 
             <button
                 class="category"
@@ -125,12 +182,14 @@
                 מחזיקי מפתחות
             </button>
 
+
             <button
                 class="category"
                 onclick="filterProducts('phone', this)"
             >
                 מעמדים לטלפון
             </button>
+
 
             <button
                 class="category"
@@ -144,6 +203,9 @@
     </div>
 
 
+
+    <!-- PRODUCTS ARE INSERTED BY JS -->
+
     <div
         id="productsGrid"
         class="products-grid"
@@ -152,7 +214,8 @@
 </section>
 
 
-<!-- CONTACT -->
+
+<!-- ================= CONTACT ================= -->
 
 <section
     id="contact"
@@ -161,27 +224,36 @@
 
     <div class="contact-box">
 
-        <h2>📦 שליחת הזמנה</h2>
+        <h2>
+            📦 שליחת הזמנה
+        </h2>
+
 
         <p>
             מלא את הפרטים וההזמנה תיפתח בוואטסאפ.
         </p>
 
+
         <form id="orderForm">
+
 
             <input
                 type="text"
                 id="customerName"
                 placeholder="שם"
+                autocomplete="name"
                 required
             >
+
 
             <input
                 type="tel"
                 id="customerPhone"
                 placeholder="מספר טלפון"
+                autocomplete="tel"
                 required
             >
+
 
             <textarea
                 id="customerMessage"
@@ -189,9 +261,13 @@
                 required
             ></textarea>
 
+
             <button type="submit">
+
                 📱 שלח הזמנה בוואטסאפ
+
             </button>
+
 
         </form>
 
@@ -200,7 +276,8 @@
 </section>
 
 
-<!-- CART OVERLAY -->
+
+<!-- ================= CART OVERLAY ================= -->
 
 <div
     id="cartOverlay"
@@ -208,25 +285,40 @@
 ></div>
 
 
-<!-- CART -->
+
+<!-- ================= CART ================= -->
 
 <div id="cart">
 
+
     <div class="cart-header">
 
-        <h2>🛒 העגלה</h2>
+        <h2>
+            🛒 העגלה
+        </h2>
 
-        <button onclick="closeCart()">
+
+        <button
+            onclick="closeCart()"
+            aria-label="סגור עגלה"
+        >
             ✕
         </button>
 
     </div>
 
 
+
+    <!-- CART ITEMS -->
+
     <div id="cartItems"></div>
 
 
+
+    <!-- CART BOTTOM -->
+
     <div class="cart-bottom">
+
 
         <!-- TIP -->
 
@@ -236,73 +328,130 @@
                 💝 טיפ
             </span>
 
+
             <select
                 id="cartTip"
                 onchange="updateCart()"
             >
-                <option value="0">ללא טיפ</option>
-                <option value="5">5%</option>
-                <option value="10">10%</option>
-                <option value="15">15%</option>
-                <option value="20">20%</option>
+
+                <option value="0">
+                    ללא טיפ
+                </option>
+
+                <option value="5">
+                    5%
+                </option>
+
+                <option value="10">
+                    10%
+                </option>
+
+                <option value="15">
+                    15%
+                </option>
+
+                <option value="20">
+                    20%
+                </option>
+
             </select>
 
         </div>
+
 
 
         <!-- COUPON -->
 
         <div class="coupon-box">
 
-            <label>
+            <label for="couponInput">
+
                 🎟️ קוד קופון
+
             </label>
+
 
             <div class="coupon-row">
 
                 <input
-                    type="text"
                     id="couponInput"
+                    type="text"
+                    inputmode="numeric"
                     placeholder="הזן קוד"
                 >
 
-                <button onclick="applyCoupon()">
+
+                <button
+                    type="button"
+                    onclick="applyCoupon()"
+                >
+
                     הפעל
+
                 </button>
 
             </div>
+
 
             <div id="couponMessage"></div>
 
         </div>
 
 
-        <!-- SUMMARY -->
+
+        <!-- TOTAL -->
 
         <div class="cart-summary">
 
-            <div>
-                <span>מוצרים:</span>
-                <span>₪<span id="productsTotal">0</span></span>
-            </div>
 
             <div>
-                <span>הנחה:</span>
+
+                <span>
+                    מוצרים:
+                </span>
+
+                <span>
+                    ₪<span id="productsTotal">0</span>
+                </span>
+
+            </div>
+
+
+
+            <div>
+
+                <span>
+                    הנחה:
+                </span>
+
                 <span>
                     -₪<span id="couponDiscount">0</span>
                 </span>
+
             </div>
 
+
+
             <div>
-                <span>טיפ:</span>
-                <span>₪<span id="tipTotal">0</span></span>
+
+                <span>
+                    טיפ:
+                </span>
+
+                <span>
+                    ₪<span id="tipTotal">0</span>
+                </span>
+
             </div>
+
+
 
             <div class="final-total">
 
                 <strong>
                     סה״כ:
                 </strong>
+
 
                 <strong>
                     ₪<span id="cartTotal">0</span>
@@ -313,11 +462,16 @@
         </div>
 
 
+
+        <!-- CHECKOUT -->
+
         <button
             class="checkout-button"
             onclick="checkout()"
         >
+
             📱 המשך להזמנה
+
         </button>
 
     </div>
@@ -325,13 +479,15 @@
 </div>
 
 
-<!-- FOOTER -->
+
+<!-- ================= FOOTER ================= -->
 
 <footer>
 
     <div class="logo">
         Print<span>3D</span>
     </div>
+
 
     <p>
         חנות מוצרי תלת־ממד
@@ -340,7 +496,12 @@
 </footer>
 
 
+
+<!-- ================= JAVASCRIPT ================= -->
+
 <script src="script.js"></script>
 
+
 </body>
+
 </html>
