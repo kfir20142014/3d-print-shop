@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Print3D | חנות תלת־ממד</title>
+    <title>Print3D</title>
 
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -18,17 +17,17 @@
     <nav>
         <a href="#home">בית</a>
         <a href="#products">מוצרים</a>
-        <a href="#contact">הזמנה</a>
+        <a href="#order">הזמנה</a>
     </nav>
 
-    <button id="openCartButton" class="cart-button">
-        🛒 עגלה <span id="cartCount">0</span>
+    <button id="cartButton" class="cart-button">
+        🛒 עגלה <b id="cartCount">0</b>
     </button>
 </header>
 
 
 <section id="home" class="hero">
-    <div class="hero-content">
+    <div>
         <div class="small-title">PRINT3D</div>
 
         <h1>
@@ -37,13 +36,12 @@
         </h1>
 
         <p>
-            פידג'טים, מחזיקי מפתחות,
-            מעמדים לטלפון ומוצרים לחדר.
+            בחרו מוצר, הוסיפו לעגלה ושלחו את ההזמנה ישירות אלינו.
         </p>
 
-        <button id="shopButton" class="hero-button">
-            🛍️ לכל המוצרים
-        </button>
+        <a href="#products" class="hero-button">
+            למוצרים
+        </a>
     </div>
 </section>
 
@@ -53,7 +51,7 @@
     <h2>המוצרים שלנו</h2>
 
     <p class="section-description">
-        בחרו מוצר והוסיפו אותו לעגלה
+        מצאו את המוצר שאתם מחפשים
     </p>
 
     <div class="controls">
@@ -64,920 +62,127 @@
             placeholder="🔎 חפש מוצר..."
         >
 
-        <div class="categories">
-
-            <button class="category active" data-category="all">
-                הכל
-            </button>
-
-            <button class="category" data-category="fidget">
-                🌀 פידג'טים
-            </button>
-
-            <button class="category" data-category="keychain">
-                🔑 מחזיקי מפתחות
-            </button>
-
-            <button class="category" data-category="phone">
-                📱 מעמדים
-            </button>
-
-            <button class="category" data-category="room">
-                🏠 לחדר
-            </button>
-
-        </div>
-    </div>
-
-
-    <!-- =========================
-         50 PRODUCTS
-    ========================== -->
-
-    <div id="productsGrid" class="products-grid">
-
-        <!-- 1 -->
-        <article class="product" data-category="fidget" data-name="Twist Fidget">
-            <a href="product.html?id=1" class="product-link">
-                <div class="product-image">
-                    <img src="images/1.jpg" alt="Twist Fidget">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Twist Fidget</h3>
-                <p>פידג'ט להעסקת הידיים.</p>
-                <div class="product-price">₪25</div>
-                <button class="add-button" data-id="1">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 2 -->
-        <article class="product" data-category="fidget" data-name="Infinity Cube">
-            <a href="product.html?id=2" class="product-link">
-                <div class="product-image">
-                    <img src="images/2.jpg" alt="Infinity Cube">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Infinity Cube</h3>
-                <p>קוביית פידג'ט מתקפלת.</p>
-                <div class="product-price">₪30</div>
-                <button class="add-button" data-id="2">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 3 -->
-        <article class="product" data-category="fidget" data-name="Fidget Ring">
-            <a href="product.html?id=3" class="product-link">
-                <div class="product-image">
-                    <img src="images/3.jpg" alt="Fidget Ring">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Fidget Ring</h3>
-                <p>טבעת פידג'ט מסתובבת.</p>
-                <div class="product-price">₪20</div>
-                <button class="add-button" data-id="3">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 4 -->
-        <article class="product" data-category="fidget" data-name="Fidget Ball">
-            <a href="product.html?id=4" class="product-link">
-                <div class="product-image">
-                    <img src="images/4.jpg" alt="Fidget Ball">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Fidget Ball</h3>
-                <p>פידג'ט כדורי קטן.</p>
-                <div class="product-price">₪30</div>
-                <button class="add-button" data-id="4">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 5 -->
-        <article class="product" data-category="fidget" data-name="Helix Fidget">
-            <a href="product.html?id=5" class="product-link">
-                <div class="product-image">
-                    <img src="images/5.jpg" alt="Helix Fidget">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Helix Fidget</h3>
-                <p>עיצוב סלילי מיוחד.</p>
-                <div class="product-price">₪35</div>
-                <button class="add-button" data-id="5">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 6 -->
-        <article class="product" data-category="fidget" data-name="Vortex Fidget">
-            <a href="product.html?id=6" class="product-link">
-                <div class="product-image">
-                    <img src="images/6.jpg" alt="Vortex Fidget">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Vortex Fidget</h3>
-                <p>פידג'ט מסתובב.</p>
-                <div class="product-price">₪35</div>
-                <button class="add-button" data-id="6">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 7 -->
-        <article class="product" data-category="fidget" data-name="Triple Helix">
-            <a href="product.html?id=7" class="product-link">
-                <div class="product-image">
-                    <img src="images/7.jpg" alt="Triple Helix">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Triple Helix</h3>
-                <p>פידג'ט תלת־סלילי.</p>
-                <div class="product-price">₪40</div>
-                <button class="add-button" data-id="7">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 8 -->
-        <article class="product" data-category="fidget" data-name="Spinning Fidget">
-            <a href="product.html?id=8" class="product-link">
-                <div class="product-image">
-                    <img src="images/8.jpg" alt="Spinning Fidget">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Spinning Fidget</h3>
-                <p>פידג'ט מסתובב קטן.</p>
-                <div class="product-price">₪30</div>
-                <button class="add-button" data-id="8">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 9 -->
-        <article class="product" data-category="fidget" data-name="Impossible Sphere">
-            <a href="product.html?id=9" class="product-link">
-                <div class="product-image">
-                    <img src="images/9.jpg" alt="Impossible Sphere">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Impossible Sphere</h3>
-                <p>כדור תלת־ממדי מיוחד.</p>
-                <div class="product-price">₪40</div>
-                <button class="add-button" data-id="9">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 10 -->
-        <article class="product" data-category="fidget" data-name="Fidget Cube">
-            <a href="product.html?id=10" class="product-link">
-                <div class="product-image">
-                    <img src="images/10.jpg" alt="Fidget Cube">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Fidget Cube</h3>
-                <p>קוביית פידג'ט.</p>
-                <div class="product-price">₪30</div>
-                <button class="add-button" data-id="10">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 11 -->
-        <article class="product" data-category="keychain" data-name="Dragon Keychain">
-            <a href="product.html?id=11" class="product-link">
-                <div class="product-image">
-                    <img src="images/11.jpg" alt="Dragon Keychain">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Dragon Keychain</h3>
-                <p>דרקון קטן למפתחות.</p>
-                <div class="product-price">₪25</div>
-                <button class="add-button" data-id="11">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 12 -->
-        <article class="product" data-category="keychain" data-name="Octopus Keychain">
-            <a href="product.html?id=12" class="product-link">
-                <div class="product-image">
-                    <img src="images/12.jpg" alt="Octopus Keychain">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Octopus Keychain</h3>
-                <p>מחזיק מפתחות תמנון.</p>
-                <div class="product-price">₪20</div>
-                <button class="add-button" data-id="12">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 13 -->
-        <article class="product" data-category="keychain" data-name="Heart Keychain">
-            <a href="product.html?id=13" class="product-link">
-                <div class="product-image">
-                    <img src="images/13.jpg" alt="Heart Keychain">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Heart Keychain</h3>
-                <p>מחזיק מפתחות לב.</p>
-                <div class="product-price">₪15</div>
-                <button class="add-button" data-id="13">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 14 -->
-        <article class="product" data-category="keychain" data-name="Crystal Keychain">
-            <a href="product.html?id=14" class="product-link">
-                <div class="product-image">
-                    <img src="images/14.jpg" alt="Crystal Keychain">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Crystal Keychain</h3>
-                <p>מחזיק מפתחות קריסטל.</p>
-                <div class="product-price">₪20</div>
-                <button class="add-button" data-id="14">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 15 -->
-        <article class="product" data-category="keychain" data-name="T-Rex Keychain">
-            <a href="product.html?id=15" class="product-link">
-                <div class="product-image">
-                    <img src="images/15.jpg" alt="T-Rex Keychain">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>T-Rex Keychain</h3>
-                <p>דינוזאור קטן למפתחות.</p>
-                <div class="product-price">₪25</div>
-                <button class="add-button" data-id="15">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 16 -->
-        <article class="product" data-category="keychain" data-name="Dinosaur Keychain">
-            <a href="product.html?id=16" class="product-link">
-                <div class="product-image">
-                    <img src="images/16.jpg" alt="Dinosaur Keychain">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Dinosaur Keychain</h3>
-                <p>מחזיק מפתחות דינוזאור.</p>
-                <div class="product-price">₪25</div>
-                <button class="add-button" data-id="16">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 17 -->
-        <article class="product" data-category="keychain" data-name="Cat Keychain">
-            <a href="product.html?id=17" class="product-link">
-                <div class="product-image">
-                    <img src="images/17.jpg" alt="Cat Keychain">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Cat Keychain</h3>
-                <p>מחזיק מפתחות חתול.</p>
-                <div class="product-price">₪20</div>
-                <button class="add-button" data-id="17">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 18 -->
-        <article class="product" data-category="keychain" data-name="Dog Keychain">
-            <a href="product.html?id=18" class="product-link">
-                <div class="product-image">
-                    <img src="images/18.jpg" alt="Dog Keychain">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Dog Keychain</h3>
-                <p>מחזיק מפתחות כלב.</p>
-                <div class="product-price">₪20</div>
-                <button class="add-button" data-id="18">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 19 -->
-        <article class="product" data-category="keychain" data-name="Game Controller Keychain">
-            <a href="product.html?id=19" class="product-link">
-                <div class="product-image">
-                    <img src="images/19.jpg" alt="Game Controller Keychain">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Game Controller Keychain</h3>
-                <p>מחזיק מפתחות גיימינג.</p>
-                <div class="product-price">₪25</div>
-                <button class="add-button" data-id="19">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 20 -->
-        <article class="product" data-category="keychain" data-name="Rocket Keychain">
-            <a href="product.html?id=20" class="product-link">
-                <div class="product-image">
-                    <img src="images/20.jpg" alt="Rocket Keychain">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Rocket Keychain</h3>
-                <p>מחזיק מפתחות רקטה.</p>
-                <div class="product-price">₪20</div>
-                <button class="add-button" data-id="20">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 21 -->
-        <article class="product" data-category="phone" data-name="Phone Stand">
-            <a href="product.html?id=21" class="product-link">
-                <div class="product-image">
-                    <img src="images/21.jpg" alt="Phone Stand">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Phone Stand</h3>
-                <p>מעמד לטלפון.</p>
-                <div class="product-price">₪35</div>
-                <button class="add-button" data-id="21">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 22 -->
-        <article class="product" data-category="phone" data-name="Foldable Phone Stand">
-            <a href="product.html?id=22" class="product-link">
-                <div class="product-image">
-                    <img src="images/22.jpg" alt="Foldable Phone Stand">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Foldable Phone Stand</h3>
-                <p>מעמד טלפון מתקפל.</p>
-                <div class="product-price">₪35</div>
-                <button class="add-button" data-id="22">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 23 -->
-        <article class="product" data-category="phone" data-name="Desk Phone Stand">
-            <a href="product.html?id=23" class="product-link">
-                <div class="product-image">
-                    <img src="images/23.jpg" alt="Desk Phone Stand">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Desk Phone Stand</h3>
-                <p>מעמד שולחני.</p>
-                <div class="product-price">₪30</div>
-                <button class="add-button" data-id="23">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 24 -->
-        <article class="product" data-category="phone" data-name="Tablet Stand">
-            <a href="product.html?id=24" class="product-link">
-                <div class="product-image">
-                    <img src="images/24.jpg" alt="Tablet Stand">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Tablet Stand</h3>
-                <p>מעמד לטאבלט.</p>
-                <div class="product-price">₪50</div>
-                <button class="add-button" data-id="24">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 25 -->
-        <article class="product" data-category="phone" data-name="Phone Riser">
-            <a href="product.html?id=25" class="product-link">
-                <div class="product-image">
-                    <img src="images/25.jpg" alt="Phone Riser">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Phone Riser</h3>
-                <p>מעמד מוגבה לטלפון.</p>
-                <div class="product-price">₪35</div>
-                <button class="add-button" data-id="25">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 26 -->
-        <article class="product" data-category="phone" data-name="Vertical Phone Stand">
-            <a href="product.html?id=26" class="product-link">
-                <div class="product-image">
-                    <img src="images/26.jpg" alt="Vertical Phone Stand">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Vertical Phone Stand</h3>
-                <p>מעמד אנכי לטלפון.</p>
-                <div class="product-price">₪40</div>
-                <button class="add-button" data-id="26">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 27 -->
-        <article class="product" data-category="phone" data-name="Gaming Phone Stand">
-            <a href="product.html?id=27" class="product-link">
-                <div class="product-image">
-                    <img src="images/27.jpg" alt="Gaming Phone Stand">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Gaming Phone Stand</h3>
-                <p>מעמד טלפון לגיימינג.</p>
-                <div class="product-price">₪45</div>
-                <button class="add-button" data-id="27">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 28 -->
-        <article class="product" data-category="phone" data-name="Minimal Phone Stand">
-            <a href="product.html?id=28" class="product-link">
-                <div class="product-image">
-                    <img src="images/28.jpg" alt="Minimal Phone Stand">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Minimal Phone Stand</h3>
-                <p>מעמד מינימליסטי.</p>
-                <div class="product-price">₪30</div>
-                <button class="add-button" data-id="28">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 29 -->
-        <article class="product" data-category="phone" data-name="Phone Dock">
-            <a href="product.html?id=29" class="product-link">
-                <div class="product-image">
-                    <img src="images/29.jpg" alt="Phone Dock">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Phone Dock</h3>
-                <p>תחנת עגינה לטלפון.</p>
-                <div class="product-price">₪40</div>
-                <button class="add-button" data-id="29">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 30 -->
-        <article class="product" data-category="phone" data-name="Phone Charging Stand">
-            <a href="product.html?id=30" class="product-link">
-                <div class="product-image">
-                    <img src="images/30.jpg" alt="Phone Charging Stand">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Phone Charging Stand</h3>
-                <p>מעמד עם מקום לטעינה.</p>
-                <div class="product-price">₪45</div>
-                <button class="add-button" data-id="30">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 31 -->
-        <article class="product" data-category="room" data-name="Desk Organizer">
-            <a href="product.html?id=31" class="product-link">
-                <div class="product-image">
-                    <img src="images/31.jpg" alt="Desk Organizer">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Desk Organizer</h3>
-                <p>ארגונית לשולחן.</p>
-                <div class="product-price">₪45</div>
-                <button class="add-button" data-id="31">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 32 -->
-        <article class="product" data-category="room" data-name="Cable Organizer">
-            <a href="product.html?id=32" class="product-link">
-                <div class="product-image">
-                    <img src="images/32.jpg" alt="Cable Organizer">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Cable Organizer</h3>
-                <p>ארגונית לכבלים.</p>
-                <div class="product-price">₪20</div>
-                <button class="add-button" data-id="32">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 33 -->
-        <article class="product" data-category="room" data-name="Cable Clips">
-            <a href="product.html?id=33" class="product-link">
-                <div class="product-image">
-                    <img src="images/33.jpg" alt="Cable Clips">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Cable Clips</h3>
-                <p>קליפסים לכבלים.</p>
-                <div class="product-price">₪15</div>
-                <button class="add-button" data-id="33">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 34 -->
-        <article class="product" data-category="room" data-name="Pencil Organizer">
-            <a href="product.html?id=34" class="product-link">
-                <div class="product-image">
-                    <img src="images/34.jpg" alt="Pencil Organizer">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Pencil Organizer</h3>
-                <p>מחזיק עטים.</p>
-                <div class="product-price">₪30</div>
-                <button class="add-button" data-id="34">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 35 -->
-        <article class="product" data-category="room" data-name="Desk Tray">
-            <a href="product.html?id=35" class="product-link">
-                <div class="product-image">
-                    <img src="images/35.jpg" alt="Desk Tray">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Desk Tray</h3>
-                <p>מגש קטן לשולחן.</p>
-                <div class="product-price">₪40</div>
-                <button class="add-button" data-id="35">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 36 -->
-        <article class="product" data-category="room" data-name="Monitor Stand">
-            <a href="product.html?id=36" class="product-link">
-                <div class="product-image">
-                    <img src="images/36.jpg" alt="Monitor Stand">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Monitor Stand</h3>
-                <p>מעמד למסך.</p>
-                <div class="product-price">₪65</div>
-                <button class="add-button" data-id="36">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 37 -->
-        <article class="product" data-category="room" data-name="Headphone Stand">
-            <a href="product.html?id=37" class="product-link">
-                <div class="product-image">
-                    <img src="images/37.jpg" alt="Headphone Stand">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Headphone Stand</h3>
-                <p>מעמד לאוזניות.</p>
-                <div class="product-price">₪50</div>
-                <button class="add-button" data-id="37">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 38 -->
-        <article class="product" data-category="room" data-name="Under Desk Drawer">
-            <a href="product.html?id=38" class="product-link">
-                <div class="product-image">
-                    <img src="images/38.jpg" alt="Under Desk Drawer">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Under Desk Drawer</h3>
-                <p>מגירה מתחת לשולחן.</p>
-                <div class="product-price">₪55</div>
-                <button class="add-button" data-id="38">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 39 -->
-        <article class="product" data-category="room" data-name="Wall Organizer">
-            <a href="product.html?id=39" class="product-link">
-                <div class="product-image">
-                    <img src="images/39.jpg" alt="Wall Organizer">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Wall Organizer</h3>
-                <p>ארגונית לתלייה.</p>
-                <div class="product-price">₪45</div>
-                <button class="add-button" data-id="39">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 40 -->
-        <article class="product" data-category="room" data-name="Hexagon Organizer">
-            <a href="product.html?id=40" class="product-link">
-                <div class="product-image">
-                    <img src="images/40.jpg" alt="Hexagon Organizer">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Hexagon Organizer</h3>
-                <p>ארגונית משושה.</p>
-                <div class="product-price">₪35</div>
-                <button class="add-button" data-id="40">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 41 -->
-        <article class="product" data-category="room" data-name="Mini Trash Can">
-            <a href="product.html?id=41" class="product-link">
-                <div class="product-image">
-                    <img src="images/41.jpg" alt="Mini Trash Can">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Mini Trash Can</h3>
-                <p>פח קטן לשולחן.</p>
-                <div class="product-price">₪30</div>
-                <button class="add-button" data-id="41">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 42 -->
-        <article class="product" data-category="room" data-name="Mini Plant Pot">
-            <a href="product.html?id=42" class="product-link">
-                <div class="product-image">
-                    <img src="images/42.jpg" alt="Mini Plant Pot">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Mini Plant Pot</h3>
-                <p>עציץ קטן.</p>
-                <div class="product-price">₪25</div>
-                <button class="add-button" data-id="42">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 43 -->
-        <article class="product" data-category="room" data-name="Desk Lamp Stand">
-            <a href="product.html?id=43" class="product-link">
-                <div class="product-image">
-                    <img src="images/43.jpg" alt="Desk Lamp Stand">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Desk Lamp Stand</h3>
-                <p>מעמד דקורטיבי למנורה.</p>
-                <div class="product-price">₪40</div>
-                <button class="add-button" data-id="43">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 44 -->
-        <article class="product" data-category="room" data-name="Controller Stand">
-            <a href="product.html?id=44" class="product-link">
-                <div class="product-image">
-                    <img src="images/44.jpg" alt="Controller Stand">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Controller Stand</h3>
-                <p>מעמד לבקר משחק.</p>
-                <div class="product-price">₪45</div>
-                <button class="add-button" data-id="44">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 45 -->
-        <article class="product" data-category="room" data-name="Game Controller Holder">
-            <a href="product.html?id=45" class="product-link">
-                <div class="product-image">
-                    <img src="images/45.jpg" alt="Game Controller Holder">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Game Controller Holder</h3>
-                <p>מחזיק לבקר משחק.</p>
-                <div class="product-price">₪50</div>
-                <button class="add-button" data-id="45">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 46 -->
-        <article class="product" data-category="room" data-name="Wall Hook">
-            <a href="product.html?id=46" class="product-link">
-                <div class="product-image">
-                    <img src="images/46.jpg" alt="Wall Hook">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Wall Hook</h3>
-                <p>וו לתלייה.</p>
-                <div class="product-price">₪20</div>
-                <button class="add-button" data-id="46">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 47 -->
-        <article class="product" data-category="room" data-name="Mini Storage Box">
-            <a href="product.html?id=47" class="product-link">
-                <div class="product-image">
-                    <img src="images/47.jpg" alt="Mini Storage Box">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Mini Storage Box</h3>
-                <p>קופסת אחסון קטנה.</p>
-                <div class="product-price">₪35</div>
-                <button class="add-button" data-id="47">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 48 -->
-        <article class="product" data-category="room" data-name="Coin Tray">
-            <a href="product.html?id=48" class="product-link">
-                <div class="product-image">
-                    <img src="images/48.jpg" alt="Coin Tray">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Coin Tray</h3>
-                <p>מגש קטן לחפצים.</p>
-                <div class="product-price">₪25</div>
-                <button class="add-button" data-id="48">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 49 -->
-        <article class="product" data-category="room" data-name="Desk Pen Holder">
-            <a href="product.html?id=49" class="product-link">
-                <div class="product-image">
-                    <img src="images/49.jpg" alt="Desk Pen Holder">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Desk Pen Holder</h3>
-                <p>מחזיק עטים לשולחן.</p>
-                <div class="product-price">₪30</div>
-                <button class="add-button" data-id="49">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
-
-        <!-- 50 -->
-        <article class="product" data-category="room" data-name="Spinning Organizer">
-            <a href="product.html?id=50" class="product-link">
-                <div class="product-image">
-                    <img src="images/50.jpg" alt="Spinning Organizer">
-                </div>
-            </a>
-            <div class="product-info">
-                <h3>Spinning Organizer</h3>
-                <p>ארגונית מסתובבת לשולחן.</p>
-                <div class="product-price">₪45</div>
-                <button class="add-button" data-id="50">🛒 הוסף לעגלה</button>
-            </div>
-        </article>
+        <div id="categories" class="categories"></div>
 
     </div>
+
+    <div id="productsGrid" class="products-grid"></div>
 
 </section>
 
 
-<section id="contact" class="contact-section">
+<section id="order" class="order-section">
 
-    <div class="contact-box">
+    <div class="order-box">
 
-        <h2>📦 שליחת הזמנה</h2>
+        <h2>📱 שליחת הזמנה</h2>
 
         <p>
-            מלאו את הפרטים וההזמנה תיפתח ב־WhatsApp.
+            לאחר מילוי הפרטים תוכלו לשלוח את ההזמנה ב־WhatsApp.
         </p>
 
-        <form id="orderForm">
+        <input
+            id="customerName"
+            type="text"
+            placeholder="שם"
+        >
 
-            <input
-                type="text"
-                id="customerName"
-                placeholder="שם מלא"
-                required
-            >
+        <input
+            id="customerPhone"
+            type="tel"
+            placeholder="טלפון"
+        >
 
-            <input
-                type="tel"
-                id="customerPhone"
-                placeholder="מספר טלפון"
-                required
-            >
+        <textarea
+            id="customerMessage"
+            placeholder="הערה להזמנה"
+        ></textarea>
 
-            <textarea
-                id="customerMessage"
-                placeholder="פרטי ההזמנה"
-                required
-            ></textarea>
-
-            <button type="submit">
-                📱 שליחת הזמנה ב־WhatsApp
-            </button>
-
-        </form>
+        <button id="sendOrderButton" class="whatsapp-button">
+            📱 שלח הזמנה ב־WhatsApp
+        </button>
 
     </div>
 
 </section>
 
 
-<div id="cartOverlay"></div>
-
+<div id="overlay"></div>
 
 <aside id="cart">
 
     <div class="cart-header">
 
-        <h2>🛒 העגלה שלי</h2>
+        <h2>🛒 העגלה</h2>
 
-        <button id="closeCartButton">✕</button>
+        <button id="closeCart">✕</button>
 
     </div>
 
-    <div id="cartItems"></div>
+    <div id="cartItems" class="cart-items"></div>
 
     <div class="cart-bottom">
 
-        <div class="tip-cart">
-            <label for="cartTip">💝 טיפ</label>
+        <div class="tip-row">
 
-            <select id="cartTip">
+            <span>💝 טיפ</span>
+
+            <select id="tipSelect">
                 <option value="0">ללא טיפ</option>
                 <option value="5">5%</option>
                 <option value="10">10%</option>
                 <option value="15">15%</option>
                 <option value="20">20%</option>
             </select>
-        </div>
-
-
-        <div class="coupon-box">
-
-            <label for="couponInput">
-                🎟️ קוד קופון
-            </label>
-
-            <div class="coupon-row">
-
-                <input
-                    id="couponInput"
-                    type="text"
-                    maxlength="10"
-                    inputmode="numeric"
-                    placeholder="הזן קוד"
-                >
-
-                <button id="couponButton">
-                    הפעל
-                </button>
-
-            </div>
-
-            <div id="couponMessage"></div>
 
         </div>
 
 
-        <div class="cart-summary">
+        <div class="coupon">
 
-            <div>
-                <span>מוצרים:</span>
-                <span>₪<span id="productsTotal">0</span></span>
-            </div>
+            <input
+                id="couponInput"
+                type="text"
+                inputmode="numeric"
+                maxlength="10"
+                placeholder="קוד קופון"
+            >
 
-            <div>
-                <span>הנחה:</span>
-                <span>-₪<span id="couponDiscount">0</span></span>
-            </div>
-
-            <div>
-                <span>טיפ:</span>
-                <span>₪<span id="tipTotal">0</span></span>
-            </div>
-
-            <div class="final-total">
-                <strong>סה״כ:</strong>
-                <strong>₪<span id="cartTotal">0</span></strong>
-            </div>
+            <button id="couponButton">
+                הפעל
+            </button>
 
         </div>
 
+        <div id="couponMessage"></div>
+
+
+        <div class="summary">
+
+            <div>
+                <span>מחיר מוצרים</span>
+                <span>₪<b id="subtotal">0</b></span>
+            </div>
+
+            <div>
+                <span>הנחה</span>
+                <span>₪<b id="discount">0</b></span>
+            </div>
+
+            <div>
+                <span>טיפ</span>
+                <span>₪<b id="tipAmount">0</b></span>
+            </div>
+
+            <div class="total">
+                <span>סה״כ</span>
+                <span>₪<b id="total">0</b></span>
+            </div>
+
+        </div>
 
         <button id="checkoutButton" class="checkout-button">
-            📱 המשך להזמנה
+            המשך להזמנה
         </button>
 
     </div>
