@@ -55,12 +55,8 @@ const products = [
     { id: 47, name: "Under-Desk Drawer", category: "room", price: 85, image: "images/47.jpg" },
     { id: 48, name: "Pencil Desk Organizer", category: "room", price: 35, image: "images/48.jpg" },
     { id: 49, name: "Hex Desk Organizer", category: "room", price: 10, image: "images/49.jpg" },
-    { id: 50, name: "Spinning Desk Organizer", category: "room", price: 100, image: "images/50.jpg" }
-];
-
-// ==========================================
-// SETTINGS
-// ==========================================
+    { id: 50, name: "Spinning Desk Organizer", category: "room", price: 100, image: "images/50.
+    ];
 
 const coupons = {
     "5839210476": 100
@@ -73,193 +69,143 @@ let currentCategory = "all";
 let appliedCoupon = null;
 
 
-// ==========================================
-// DISPLAY PRODUCTS
-// ==========================================
+// ==================== PRODUCTS ====================
 
 function displayProducts(list = products) {
 
-    const grid =
-        document.getElementById("productsGrid");
+    const grid = document.getElementById("productsGrid");
 
     if (!grid) return;
 
     grid.innerHTML = "";
 
-
     if (list.length === 0) {
-
         grid.innerHTML = `
             <div class="no-products">
                 😕 לא נמצאו מוצרים
             </div>
         `;
-
         return;
     }
 
-
     list.forEach(product => {
 
-        grid.innerHTML += `
+        const card = document.createElement("div");
 
-            <div class="product">
+        card.className = "product";
 
-                <a
-                    href="product.html?id=${product.id}"
-                    class="product-link"
-                >
+        card.innerHTML = `
+            <a href="product.html?id=${product.id}" class="product-link">
 
-                    <div class="product-image">
+                <div class="product-image">
 
-                        <img
-                            src="${product.image}"
-                            alt="${product.name}"
-                            loading="lazy"
-                        >
-
-                    </div>
-
-                </a>
-
-
-                <div class="product-info">
-
-                    <a
-                        href="product.html?id=${product.id}"
-                        class="product-title-link"
+                    <img
+                        src="${product.image}"
+                        alt="${product.name}"
+                        onerror="this.src='https://placehold.co/600x600?text=Print3D'"
                     >
-                        <h3>
-                            ${product.name}
-                        </h3>
-                    </a>
-
-                    <p>
-                        מוצר איכותי בהדפסת תלת־ממד
-                    </p>
-
-                    <div class="product-price">
-                        ₪${product.price}
-                    </div>
-
-                    <button
-                        class="add-button"
-                        onclick="addToCart(${product.id})"
-                    >
-                        🛒 הוסף לעגלה
-                    </button>
 
                 </div>
 
-            </div>
+            </a>
 
+            <div class="product-info">
+
+                <a
+                    href="product.html?id=${product.id}"
+                    class="product-title-link"
+                >
+                    <h3>${product.name}</h3>
+                </a>
+
+                <p>
+                    מוצר איכותי בהדפסת תלת־ממד
+                </p>
+
+                <div class="product-price">
+                    ₪${product.price}
+                </div>
+
+                <button
+                    class="add-button"
+                    onclick="addToCart(${product.id})"
+                >
+                    🛒 הוסף לעגלה
+                </button>
+
+            </div>
         `;
 
+        grid.appendChild(card);
     });
-
 }
 
 
-// ==========================================
-// SEARCH
-// ==========================================
+// ==================== SEARCH ====================
 
 function searchProducts() {
 
-    const input =
-        document.getElementById("searchInput");
+    const input = document.getElementById("searchInput");
 
-    const search =
-        input.value
-            .toLowerCase()
-            .trim();
+    if (!input) return;
 
+    const search = input.value.toLowerCase().trim();
 
     let filtered = products;
 
-
     if (currentCategory !== "all") {
 
-        filtered =
-            filtered.filter(
-                product =>
-                    product.category ===
-                    currentCategory
-            );
+        filtered = filtered.filter(product =>
+            product.category === currentCategory
+        );
 
     }
-
 
     if (search !== "") {
 
-        filtered =
-            filtered.filter(
-                product =>
-                    product.name
-                        .toLowerCase()
-                        .includes(search)
-            );
+        filtered = filtered.filter(product =>
+            product.name.toLowerCase().includes(search)
+        );
 
     }
 
-
     displayProducts(filtered);
-
 }
 
 
-// ==========================================
-// FILTER
-// ==========================================
+// ==================== CATEGORIES ====================
 
 function filterProducts(category, button) {
 
     currentCategory = category;
 
-
     document
         .querySelectorAll(".category")
-        .forEach(btn => {
-
-            btn.classList.remove("active");
-
-        });
-
+        .forEach(btn => btn.classList.remove("active"));
 
     if (button) {
-
         button.classList.add("active");
-
     }
 
-
     searchProducts();
-
 }
 
 
-// ==========================================
-// CART
-// ==========================================
+// ==================== CART ====================
 
 function addToCart(id) {
 
-    const product =
-        products.find(
-            product =>
-                product.id === id
-        );
-
+    const product = products.find(
+        product => product.id === id
+    );
 
     if (!product) return;
-
 
     cart.push(product);
 
     updateCart();
 
     openCart();
-
 }
 
 
@@ -268,7 +214,6 @@ function removeFromCart(index) {
     cart.splice(index, 1);
 
     updateCart();
-
 }
 
 
@@ -279,23 +224,18 @@ function getProductsTotal() {
             total + Number(product.price),
         0
     );
-
 }
 
 
-// ==========================================
-// TIP
-// ==========================================
+// ==================== TIP ====================
 
 function getTipPercent() {
 
-    const select =
-        document.getElementById("cartTip");
+    const select = document.getElementById("cartTip");
 
     if (!select) return 0;
 
     return Number(select.value);
-
 }
 
 
@@ -306,13 +246,10 @@ function getTipAmount() {
         getTipPercent() /
         100
     );
-
 }
 
 
-// ==========================================
-// COUPON
-// ==========================================
+// ==================== COUPON ====================
 
 function applyCoupon() {
 
@@ -322,10 +259,9 @@ function applyCoupon() {
     const message =
         document.getElementById("couponMessage");
 
+    if (!input) return;
 
-    const code =
-        input.value.trim();
-
+    const code = input.value.trim();
 
     if (coupons[code] !== undefined) {
 
@@ -334,68 +270,56 @@ function applyCoupon() {
             discount: coupons[code]
         };
 
-
-        message.innerHTML =
-            `✅ הקופון הופעל! ${coupons[code]}% הנחה`;
+        if (message) {
+            message.textContent =
+                `✅ הקופון הופעל! ${coupons[code]}% הנחה`;
+        }
 
     } else {
 
         appliedCoupon = null;
 
-        message.innerHTML =
-            "❌ קוד קופון לא תקין";
-
+        if (message) {
+            message.textContent =
+                "❌ קוד קופון לא תקין";
+        }
     }
 
-
     updateCart();
-
 }
 
 
 function getCouponDiscount() {
 
-    if (!appliedCoupon) {
-        return 0;
-    }
-
+    if (!appliedCoupon) return 0;
 
     return Math.round(
         getProductsTotal() *
         appliedCoupon.discount /
         100
     );
-
 }
 
 
-// ==========================================
-// UPDATE CART
-// ==========================================
+// ==================== UPDATE CART ====================
 
 function updateCart() {
-
-    const cartItems =
-        document.getElementById("cartItems");
 
     const count =
         document.getElementById("cartCount");
 
+    const items =
+        document.getElementById("cartItems");
 
     if (count) {
-
-        count.textContent =
-            cart.length;
-
+        count.textContent = cart.length;
     }
 
-
-    if (!cartItems) return;
-
+    if (!items) return;
 
     if (cart.length === 0) {
 
-        cartItems.innerHTML = `
+        items.innerHTML = `
             <div class="empty-cart">
                 🛒
                 <br><br>
@@ -405,59 +329,48 @@ function updateCart() {
 
     } else {
 
-        cartItems.innerHTML = "";
+        items.innerHTML = "";
 
+        cart.forEach((product, index) => {
 
-        cart.forEach(
-            (product, index) => {
+            items.innerHTML += `
 
-                cartItems.innerHTML += `
+                <div class="cart-item">
 
-                    <div class="cart-item">
+                    <img
+                        src="${product.image}"
+                        class="cart-item-image"
+                        alt="${product.name}"
+                        onerror="this.src='https://placehold.co/100x100?text=3D'"
+                    >
 
-                        <img
-                            src="${product.image}"
-                            class="cart-item-image"
-                            alt="${product.name}"
-                        >
+                    <div class="cart-item-info">
 
-                        <div class="cart-item-info">
+                        <h4>
+                            ${product.name}
+                        </h4>
 
-                            <h4>
-                                ${product.name}
-                            </h4>
-
-                            <div>
-                                ₪${product.price}
-                            </div>
-
+                        <div>
+                            ₪${product.price}
                         </div>
-
-                        <button
-                            class="remove-button"
-                            onclick="removeFromCart(${index})"
-                        >
-                            ✕
-                        </button>
 
                     </div>
 
-                `;
+                    <button
+                        class="remove-button"
+                        onclick="removeFromCart(${index})"
+                    >
+                        ✕
+                    </button>
 
-            }
-        );
-
+                </div>
+            `;
+        });
     }
 
-
-    const subtotal =
-        getProductsTotal();
-
-    const discount =
-        getCouponDiscount();
-
-    const tip =
-        getTipAmount();
+    const subtotal = getProductsTotal();
+    const discount = getCouponDiscount();
+    const tip = getTipAmount();
 
     const total =
         Math.max(
@@ -465,385 +378,110 @@ function updateCart() {
             subtotal - discount + tip
         );
 
-
     const productsTotal =
-        document.getElementById(
-            "productsTotal"
-        );
+        document.getElementById("productsTotal");
 
     const couponDiscount =
-        document.getElementById(
-            "couponDiscount"
-        );
+        document.getElementById("couponDiscount");
 
     const tipTotal =
-        document.getElementById(
-            "tipTotal"
-        );
+        document.getElementById("tipTotal");
 
     const cartTotal =
-        document.getElementById(
-            "cartTotal"
-        );
-
+        document.getElementById("cartTotal");
 
     if (productsTotal) {
-
-        productsTotal.textContent =
-            subtotal;
-
+        productsTotal.textContent = subtotal;
     }
-
 
     if (couponDiscount) {
-
-        couponDiscount.textContent =
-            discount;
-
+        couponDiscount.textContent = discount;
     }
-
 
     if (tipTotal) {
-
-        tipTotal.textContent =
-            tip;
-
+        tipTotal.textContent = tip;
     }
-
 
     if (cartTotal) {
-
-        cartTotal.textContent =
-            total;
-
+        cartTotal.textContent = total;
     }
-
 }
 
 
-// ==========================================
-// CART OPEN / CLOSE
-// ==========================================
+// ==================== CART OPEN/CLOSE ====================
 
 function openCart() {
 
-    const cart =
+    const cartElement =
         document.getElementById("cart");
 
     const overlay =
         document.getElementById("cartOverlay");
 
-
-    if (cart) {
-
-        cart.classList.add("open");
-
+    if (cartElement) {
+        cartElement.classList.add("open");
     }
-
 
     if (overlay) {
-
         overlay.classList.add("show");
-
     }
-
 }
 
 
 function closeCart() {
 
-    const cart =
+    const cartElement =
         document.getElementById("cart");
 
     const overlay =
         document.getElementById("cartOverlay");
 
-
-    if (cart) {
-
-        cart.classList.remove("open");
-
+    if (cartElement) {
+        cartElement.classList.remove("open");
     }
-
 
     if (overlay) {
-
         overlay.classList.remove("show");
-
     }
-
 }
 
 
-// ==========================================
-// CHECKOUT
-// ==========================================
-
-function checkout() {
-
-    if (cart.length === 0) {
-
-        alert("העגלה שלך ריקה 🛒");
-
-        return;
-
-    }
-
-
-    let message =
-        "שלום! אני רוצה להזמין:\n\n";
-
-
-    cart.forEach(product => {
-
-        message +=
-            "• " +
-            product.name +
-            " - ₪" +
-            product.price +
-            "\n";
-
-    });
-
-
-    const subtotal =
-        getProductsTotal();
-
-    const discount =
-        getCouponDiscount();
-
-    const tip =
-        getTipAmount();
-
-    const total =
-        Math.max(
-            0,
-            subtotal - discount + tip
-        );
-
-
-    message +=
-        "\n💵 מחיר מוצרים: ₪" +
-        subtotal;
-
-
-    if (appliedCoupon) {
-
-        message +=
-            "\n🎟️ קופון: " +
-            appliedCoupon.code +
-            "\n💸 הנחה: -₪" +
-            discount;
-
-    }
-
-
-    if (tip > 0) {
-
-        message +=
-            "\n💝 טיפ: ₪" +
-            tip;
-
-    }
-
-
-    message +=
-        "\n\n💰 סה״כ: ₪" +
-        total;
-
-
-    const messageBox =
-        document.getElementById(
-            "customerMessage"
-        );
-
-
-    if (messageBox) {
-
-        messageBox.value =
-            message;
-
-    }
-
-
-    closeCart();
-
-
-    const contact =
-        document.getElementById(
-            "contact"
-        );
-
-
-    if (contact) {
-
-        contact.scrollIntoView({
-            behavior: "smooth"
-        });
-
-    }
-
-}
-
-
-// ==========================================
-// WHATSAPP
-// ==========================================
-
-const orderForm =
-    document.getElementById(
-        "orderForm"
-    );
-
-
-if (orderForm) {
-
-    orderForm.addEventListener(
-        "submit",
-        function(event) {
-
-            event.preventDefault();
-
-
-            const name =
-                document
-                    .getElementById(
-                        "customerName"
-                    )
-                    .value
-                    .trim();
-
-
-            const phone =
-                document
-                    .getElementById(
-                        "customerPhone"
-                    )
-                    .value
-                    .trim();
-
-
-            const message =
-                document
-                    .getElementById(
-                        "customerMessage"
-                    )
-                    .value
-                    .trim();
-
-
-            if (
-                !name ||
-                !phone ||
-                !message
-            ) {
-
-                alert(
-                    "נא למלא את כל הפרטים."
-                );
-
-                return;
-
-            }
-
-
-            const whatsappMessage =
-
-                "🛍️ *הזמנה חדשה מ-Print3D*\n\n" +
-
-                "👤 שם: " +
-                name +
-                "\n" +
-
-                "📱 טלפון: " +
-                phone +
-                "\n\n" +
-
-                "📦 הזמנה:\n" +
-                message;
-
-
-            const url =
-                "https://wa.me/" +
-                whatsappNumber +
-                "?text=" +
-                encodeURIComponent(
-                    whatsappMessage
-                );
-
-
-            window.open(
-                url,
-                "_blank"
-            );
-
-        }
-    );
-
-}
-
-
-// ==========================================
-// PRODUCT PAGE
-// ==========================================
+// ==================== PRODUCT PAGE ====================
 
 function loadProductPage() {
 
     const container =
-        document.getElementById(
-            "productDetails"
-        );
-
+        document.getElementById("productDetails");
 
     if (!container) return;
-
 
     const params =
         new URLSearchParams(
             window.location.search
         );
 
-
     const id =
-        Number(
-            params.get("id")
-        );
-
+        Number(params.get("id"));
 
     const product =
         products.find(
-            product =>
-                product.id === id
+            product => product.id === id
         );
-
 
     if (!product) {
 
         container.innerHTML = `
-
             <div class="no-products">
-
                 😕 המוצר לא נמצא
-
                 <br><br>
-
                 <a href="index.html#products">
                     חזרה לחנות
                 </a>
-
             </div>
-
         `;
 
         return;
-
     }
-
-
-    document.title =
-        product.name +
-        " | Print3D";
-
 
     container.innerHTML = `
 
@@ -854,15 +492,15 @@ function loadProductPage() {
                 <img
                     src="${product.image}"
                     alt="${product.name}"
+                    onerror="this.src='https://placehold.co/800x800?text=Print3D'"
                 >
 
             </div>
 
-
             <div class="product-page-info">
 
                 <span class="product-category">
-                    ${getCategoryName(product.category)}
+                    ${product.category}
                 </span>
 
                 <h1>
@@ -875,7 +513,6 @@ function loadProductPage() {
 
                 <p>
                     מוצר איכותי בהדפסת תלת־ממד.
-                    מתאים לבית, לחדר או כמתנה.
                 </p>
 
                 <button
@@ -888,61 +525,147 @@ function loadProductPage() {
             </div>
 
         </div>
-
     `;
-
 }
 
 
-function getCategoryName(category) {
+// ==================== WHATSAPP ====================
 
-    const names = {
+function checkout() {
 
-        fidget: "🌀 פידג'טים",
+    if (cart.length === 0) {
 
-        keychain: "🔑 מחזיקי מפתחות",
+        alert("העגלה שלך ריקה 🛒");
 
-        phone: "📱 מעמדים",
+        return;
+    }
 
-        room: "🏠 לחדר"
+    let message =
+        "שלום! אני רוצה להזמין:\n\n";
 
-    };
+    cart.forEach(product => {
 
+        message +=
+            "• " +
+            product.name +
+            " - ₪" +
+            product.price +
+            "\n";
 
-    return names[category] || "מוצר";
+    });
 
-}
+    const subtotal = getProductsTotal();
+    const discount = getCouponDiscount();
+    const tip = getTipAmount();
 
-
-// ==========================================
-// SCROLL
-// ==========================================
-
-function goToProducts() {
-
-    const section =
-        document.getElementById(
-            "products"
+    const total =
+        Math.max(
+            0,
+            subtotal - discount + tip
         );
 
+    message +=
+        "\n💵 מחיר מוצרים: ₪" +
+        subtotal;
 
-    if (section) {
+    if (appliedCoupon) {
 
-        section.scrollIntoView({
+        message +=
+            "\n🎟️ קופון: " +
+            appliedCoupon.code +
+            "\n💸 הנחה: -₪" +
+            discount;
+    }
+
+    if (tip > 0) {
+
+        message +=
+            "\n💝 טיפ: ₪" +
+            tip;
+    }
+
+    message +=
+        "\n\n💰 סה״כ: ₪" +
+        total;
+
+    const messageBox =
+        document.getElementById(
+            "customerMessage"
+        );
+
+    if (messageBox) {
+
+        messageBox.value = message;
+
+    }
+
+    closeCart();
+
+    const contact =
+        document.getElementById("contact");
+
+    if (contact) {
+
+        contact.scrollIntoView({
             behavior: "smooth"
         });
 
     }
-
 }
 
 
-// ==========================================
-// START
-// ==========================================
+const orderForm =
+    document.getElementById("orderForm");
+
+if (orderForm) {
+
+    orderForm.addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+            const name =
+                document.getElementById(
+                    "customerName"
+                ).value.trim();
+
+            const phone =
+                document.getElementById(
+                    "customerPhone"
+                ).value.trim();
+
+            const message =
+                document.getElementById(
+                    "customerMessage"
+                ).value.trim();
+
+            const whatsappMessage =
+                "🛍️ *הזמנה חדשה מ-Print3D*\n\n" +
+                "👤 שם: " + name + "\n" +
+                "📱 טלפון: " + phone + "\n\n" +
+                "📦 הזמנה:\n" +
+                message;
+
+            const url =
+                "https://wa.me/" +
+                whatsappNumber +
+                "?text=" +
+                encodeURIComponent(
+                    whatsappMessage
+                );
+
+            window.open(
+                url,
+                "_blank"
+            );
+        }
+    );
+}
+
+
+// ==================== START ====================
 
 displayProducts();
-
 updateCart();
-
 loadProductPage();
