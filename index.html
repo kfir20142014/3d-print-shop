@@ -3,11 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Print3D | חנות תלת־ממד</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="style.css">
+    <title>Print3D | חנות תלת מימד</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 </head>
 
 <body>
@@ -21,10 +28,13 @@
     <nav>
         <a href="#home">בית</a>
         <a href="#products">מוצרים</a>
-        <a href="#contact">הזמנה</a>
+        <a href="#contact">צור קשר</a>
     </nav>
 
-    <button class="cart-button" onclick="openCart()">
+    <button
+        class="cart-button"
+        onclick="openCart()"
+    >
         🛒 עגלה
         <span id="cartCount">0</span>
     </button>
@@ -32,23 +42,27 @@
 </header>
 
 
-<section class="hero" id="home">
+<!-- HERO -->
+
+<section
+    id="home"
+    class="hero"
+>
 
     <div class="hero-content">
 
-        <p class="small-title">
-            PRINTED WITH PASSION
-        </p>
+        <div class="small-title">
+            PRINTED WITH 3D
+        </div>
 
         <h1>
             מוצרים מגניבים
-            <br>
             <span>בהדפסת תלת־ממד</span>
         </h1>
 
         <p>
             פידג'טים, מחזיקי מפתחות,
-            מעמדים ומוצרים לחדר.
+            מעמדים לטלפון ומוצרים לחדר.
         </p>
 
         <button
@@ -63,12 +77,17 @@
 </section>
 
 
-<section class="products-section" id="products">
+<!-- PRODUCTS -->
+
+<section
+    id="products"
+    class="products-section"
+>
 
     <h2>המוצרים שלנו</h2>
 
     <p class="section-description">
-        מצאו את המוצר המושלם עבורכם
+        בחר מוצר והוסף אותו לעגלה
     </p>
 
 
@@ -88,35 +107,35 @@
                 class="category active"
                 onclick="filterProducts('all', this)"
             >
-                הכול
+                הכל
             </button>
 
             <button
                 class="category"
                 onclick="filterProducts('fidget', this)"
             >
-                🌀 פידג'טים
+                פידג'טים
             </button>
 
             <button
                 class="category"
                 onclick="filterProducts('keychain', this)"
             >
-                🔑 מחזיקי מפתחות
+                מחזיקי מפתחות
             </button>
 
             <button
                 class="category"
                 onclick="filterProducts('phone', this)"
             >
-                📱 מעמדים
+                מעמדים לטלפון
             </button>
 
             <button
                 class="category"
                 onclick="filterProducts('room', this)"
             >
-                🏠 לחדר
+                לחדר
             </button>
 
         </div>
@@ -132,17 +151,19 @@
 </section>
 
 
+<!-- CONTACT -->
+
 <section
-    class="contact-section"
     id="contact"
+    class="contact-section"
 >
 
     <div class="contact-box">
 
-        <h2>📩 רוצים להזמין?</h2>
+        <h2>📦 שליחת הזמנה</h2>
 
         <p>
-            מלאו את הפרטים ונשלח את ההזמנה ל־WhatsApp.
+            מלא את הפרטים וההזמנה תיפתח בוואטסאפ.
         </p>
 
         <form id="orderForm">
@@ -150,7 +171,7 @@
             <input
                 type="text"
                 id="customerName"
-                placeholder="שם מלא"
+                placeholder="שם"
                 required
             >
 
@@ -168,7 +189,7 @@
             ></textarea>
 
             <button type="submit">
-                📱 שליחת הזמנה ב־WhatsApp
+                📱 שלח הזמנה בוואטסאפ
             </button>
 
         </form>
@@ -178,18 +199,7 @@
 </section>
 
 
-<footer>
-
-    <div class="logo">
-        Print<span>3D</span>
-    </div>
-
-    <p>
-        © 2026 Print3D — כל הזכויות שמורות
-    </p>
-
-</footer>
-
+<!-- CART OVERLAY -->
 
 <div
     id="cartOverlay"
@@ -197,11 +207,13 @@
 ></div>
 
 
-<aside id="cart">
+<!-- CART -->
+
+<div id="cart">
 
     <div class="cart-header">
 
-        <h2>🛒 העגלה שלי</h2>
+        <h2>🛒 העגלה</h2>
 
         <button onclick="closeCart()">
             ✕
@@ -215,11 +227,13 @@
 
     <div class="cart-bottom">
 
+        <!-- TIP -->
+
         <div class="tip-cart">
 
-            <label for="cartTip">
+            <span>
                 💝 טיפ
-            </label>
+            </span>
 
             <select
                 id="cartTip"
@@ -229,14 +243,17 @@
                 <option value="5">5%</option>
                 <option value="10">10%</option>
                 <option value="15">15%</option>
+                <option value="20">20%</option>
             </select>
 
         </div>
 
 
+        <!-- COUPON -->
+
         <div class="coupon-box">
 
-            <label for="couponInput">
+            <label>
                 🎟️ קוד קופון
             </label>
 
@@ -245,15 +262,10 @@
                 <input
                     type="text"
                     id="couponInput"
-                    placeholder="10 ספרות"
-                    maxlength="10"
-                    inputmode="numeric"
+                    placeholder="הזן קוד"
                 >
 
-                <button
-                    type="button"
-                    onclick="applyCoupon()"
-                >
+                <button onclick="applyCoupon()">
                     הפעל
                 </button>
 
@@ -264,38 +276,32 @@
         </div>
 
 
+        <!-- SUMMARY -->
+
         <div class="cart-summary">
 
             <div>
                 <span>מוצרים:</span>
-
-                <span>
-                    ₪<span id="productsTotal">0</span>
-                </span>
+                <span>₪<span id="productsTotal">0</span></span>
             </div>
 
-
             <div>
-                <span>קופון:</span>
-
+                <span>הנחה:</span>
                 <span>
                     -₪<span id="couponDiscount">0</span>
                 </span>
             </div>
 
-
             <div>
                 <span>טיפ:</span>
-
-                <span>
-                    ₪<span id="tipTotal">0</span>
-                </span>
+                <span>₪<span id="tipTotal">0</span></span>
             </div>
-
 
             <div class="final-total">
 
-                <span>סה״כ:</span>
+                <strong>
+                    סה״כ:
+                </strong>
 
                 <strong>
                     ₪<span id="cartTotal">0</span>
@@ -310,12 +316,27 @@
             class="checkout-button"
             onclick="checkout()"
         >
-            📩 המשך להזמנה
+            📱 המשך להזמנה
         </button>
 
     </div>
 
-</aside>
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="logo">
+        Print<span>3D</span>
+    </div>
+
+    <p>
+        חנות מוצרי תלת־ממד
+    </p>
+
+</footer>
 
 
 <script src="script.js"></script>
