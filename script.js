@@ -58,6 +58,10 @@ const products = [
     { id: 50, name: "Spinning Desk Organizer", category: "room", price: 100, image: "images/50.jpg" }
 ];
 
+// ==========================================
+// SETTINGS
+// ==========================================
+
 const coupons = {
     "5839210476": 100
 };
@@ -69,9 +73,9 @@ let currentCategory = "all";
 let appliedCoupon = null;
 
 
-// ===============================
-// הצגת מוצרים
-// ===============================
+// ==========================================
+// DISPLAY PRODUCTS
+// ==========================================
 
 function displayProducts(list = products) {
 
@@ -81,7 +85,7 @@ function displayProducts(list = products) {
 
     grid.innerHTML = "";
 
-    if (list.length === 0) {
+    if (!list || list.length === 0) {
 
         grid.innerHTML = `
             <div style="
@@ -97,9 +101,11 @@ function displayProducts(list = products) {
         return;
     }
 
+
     list.forEach(product => {
 
         grid.innerHTML += `
+
             <div class="product">
 
                 <div class="product-image">
@@ -111,6 +117,7 @@ function displayProducts(list = products) {
                     >
 
                 </div>
+
 
                 <div class="product-info">
 
@@ -137,15 +144,16 @@ function displayProducts(list = products) {
                 </div>
 
             </div>
+
         `;
 
     });
 }
 
 
-// ===============================
-// חיפוש
-// ===============================
+// ==========================================
+// SEARCH
+// ==========================================
 
 function searchProducts() {
 
@@ -157,30 +165,28 @@ function searchProducts() {
             ? input.value.toLowerCase().trim()
             : "";
 
+
     let filtered = products;
 
 
     if (currentCategory !== "all") {
 
-        filtered =
-            filtered.filter(
-                product =>
-                    product.category ===
-                    currentCategory
-            );
+        filtered = filtered.filter(
+            product =>
+                product.category === currentCategory
+        );
 
     }
 
 
     if (search !== "") {
 
-        filtered =
-            filtered.filter(
-                product =>
-                    product.name
-                        .toLowerCase()
-                        .includes(search)
-            );
+        filtered = filtered.filter(
+            product =>
+                product.name
+                    .toLowerCase()
+                    .includes(search)
+        );
 
     }
 
@@ -189,20 +195,19 @@ function searchProducts() {
 }
 
 
-// ===============================
-// קטגוריות
-// ===============================
+// ==========================================
+// CATEGORIES
+// ==========================================
 
 function filterProducts(category, button) {
 
     currentCategory = category;
 
+
     document
         .querySelectorAll(".category")
         .forEach(btn => {
-
             btn.classList.remove("active");
-
         });
 
 
@@ -215,16 +220,15 @@ function filterProducts(category, button) {
 }
 
 
-// ===============================
-// הוספה לעגלה
-// ===============================
+// ==========================================
+// ADD TO CART
+// ==========================================
 
 function addToCart(id) {
 
     const product =
         products.find(
-            product =>
-                product.id === id
+            product => product.id === id
         );
 
 
@@ -238,25 +242,37 @@ function addToCart(id) {
     openCart();
 }
 
+
+// ==========================================
+// REMOVE FROM CART
+// ==========================================
+
 function removeFromCart(index) {
+
     cart.splice(index, 1);
+
     updateCart();
 }
+
+
+// ==========================================
+// PRODUCTS TOTAL
+// ==========================================
 
 function getProductsTotal() {
 
     return cart.reduce(
         (total, product) =>
-            total + product.price,
+            total + Number(product.price),
         0
     );
 
 }
 
 
-// ===============================
-// חישוב טיפ
-// ===============================
+// ==========================================
+// TIP
+// ==========================================
 
 function getTipPercent() {
 
@@ -274,70 +290,98 @@ function getTipAmount() {
     const subtotal =
         getProductsTotal();
 
-    const tipPercent =
+    const percent =
         getTipPercent();
 
-    return Math.round(
-        subtotal *
-        tipPercent /
-        100
-    );
 
+    return Math.round(
+        subtotal * percent / 100
+    );
 }
 
-// ===============================
+
+// ==========================================
 // COUPON
-// ===============================
+// ==========================================
 
 function applyCoupon() {
+
     const input =
         document.getElementById("couponInput");
 
     const message =
         document.getElementById("couponMessage");
 
+
     if (!input) return;
+
+
     const code =
         input.value.trim();
 
-    if (coupons[code] !== undefined) {✅
-        appliedCoupons = {
+
+    if (coupons[code] !== undefined) {
+
+        appliedCoupon = {
             code: code,
             discount: coupons[code]
         };
 
+
         if (message) {
+
             message.innerHTML =
-+ " הקופון הופעל!✅"
-            coupons[code] +
-;"הנחה %"
+                "✅ הקופון הופעל! " +
+                coupons[code] +
+                "% הנחה";
+
         }
 
-                                     } else {
-        appliedCoupon = null
+    } else {
+
+        appliedCoupon = null;
+
+
         if (message) {
-            message.innerHTML=
-;"קוד קופון לא תקין❌"
+
+            message.innerHTML =
+                "❌ קוד קופון לא תקין";
+
         }
+
     }
+
 
     updateCart();
 }
 
 
-const subtotal =
-    getProductsTotal();
+// ==========================================
+// COUPON DISCOUNT
+// ==========================================
 
-return Math.round(
-    subtotal *
-    appliedCoupon.discount /
+function getCouponDiscount() {
+
+    if (!appliedCoupon) {
+        return 0;
+    }
+
+
+    const subtotal =
+        getProductsTotal();
+
+
+    return Math.round(
+        subtotal *
+        appliedCoupon.discount /
+        100
     );
 }
 
 
-// ===============================
-// עדכון העגלה
-// ===============================
+// ==========================================
+// UPDATE CART
+// ==========================================
 
 function updateCart() {
 
@@ -350,11 +394,11 @@ function updateCart() {
     const productsTotalElement =
         document.getElementById("productsTotal");
 
-    const tipTotalElement =
-        document.getElementById("tipTotal");
-
     const discountElement =
         document.getElementById("couponDiscount");
+
+    const tipTotalElement =
+        document.getElementById("tipTotal");
 
     const cartTotalElement =
         document.getElementById("cartTotal");
@@ -374,11 +418,17 @@ function updateCart() {
     if (cart.length === 0) {
 
         cartItems.innerHTML = `
+
             <div class="empty-cart">
+
                 🛒
+
                 <br><br>
+
                 העגלה שלך ריקה
+
             </div>
+
         `;
 
     } else {
@@ -437,33 +487,34 @@ function updateCart() {
     const tip =
         getTipAmount();
 
+
     const total =
         Math.max(
             0,
-            subtotal -
-            discount +
-            tip
-            );
+            subtotal - discount + tip
+        );
 
 
     if (productsTotalElement) {
 
         productsTotalElement.textContent =
-            productsTotal;
+            subtotal;
 
     }
 
 
     if (discountElement) {
-        discountElement.textContent=
+
+        discountElement.textContent =
             discount;
+
     }
 
 
     if (tipTotalElement) {
 
         tipTotalElement.textContent =
-            tipAmount;
+            tip;
 
     }
 
@@ -471,14 +522,15 @@ function updateCart() {
     if (cartTotalElement) {
 
         cartTotalElement.textContent =
-            finalTotal;
+            total;
 
     }
 }
 
-// ===============================
-// פתיחת עגלה וסגירה
-// ===============================
+
+// ==========================================
+// OPEN CART
+// ==========================================
 
 function openCart() {
 
@@ -488,13 +540,25 @@ function openCart() {
     const overlay =
         document.getElementById("cartOverlay");
 
+
     if (cartElement) {
+
         cartElement.classList.add("open");
 
+    }
+
+
     if (overlay) {
+
         overlay.classList.add("show");
+
     }
-    }
+}
+
+
+// ==========================================
+// CLOSE CART
+// ==========================================
 
 function closeCart() {
 
@@ -504,28 +568,34 @@ function closeCart() {
     const overlay =
         document.getElementById("cartOverlay");
 
+
     if (cartElement) {
+
         cartElement.classList.remove("open");
 
-        if (overlay) {
-        overlay.classList.remove("show");
-}
     }
 
 
-// ===============================
-// מעבר לטופס הזמנה
-// ===============================
+    if (overlay) {
+
+        overlay.classList.remove("show");
+
+    }
+}
+
+
+// ==========================================
+// CHECKOUT
+// ==========================================
 
 function checkout() {
 
     if (cart.length === 0) {
 
-        alert(
-            "העגלה שלך ריקה 🛒"
-        );
+        alert("העגלה שלך ריקה 🛒");
 
         return;
+
     }
 
 
@@ -552,18 +622,14 @@ function checkout() {
         getCouponDiscount();
 
     const tip =
-        getTipPercent();
-
-    const tipAmount =
         getTipAmount();
+
 
     const total =
         Math.max(
             0,
-            subtotal -
-            discount +
-            tip
-            );
+            subtotal - discount + tip
+        );
 
 
     message +=
@@ -572,18 +638,20 @@ function checkout() {
 
 
     if (appliedCoupon) {
+
         message +=
-            "\n קופון 🎟️: " +
-            appliedCoupon.code+
-            "\n💸 הנחה: -₪"+
+            "\n🎟️ קופון: " +
+            appliedCoupon.code +
+            "\n💸 הנחה: -₪" +
             discount;
+
     }
 
 
     if (tip > 0) {
 
         message +=
-            "\n💝 טיפ ₪" +
+            "\n💝 טיפ: ₪" +
             tip;
 
     }
@@ -611,26 +679,21 @@ function checkout() {
 
     closeCart();
 
-const contact =
-    document.getElementById("contact");
 
-    if (contact) {
-
-        contact.scrollIntoView({
+    document
+        .getElementById("contact")
+        .scrollIntoView({
             behavior: "smooth"
         });
-    }
 }
 
 
-// ===============================
-// שליחת WhatsApp
-// ===============================
+// ==========================================
+// WHATSAPP
+// ==========================================
 
 const orderForm =
-    document.getElementById(
-        "orderForm"
-    );
+    document.getElementById("orderForm");
 
 
 if (orderForm) {
@@ -644,27 +707,21 @@ if (orderForm) {
 
             const name =
                 document
-                    .getElementById(
-                        "customerName"
-                    )
+                    .getElementById("customerName")
                     .value
                     .trim();
 
 
             const phone =
                 document
-                    .getElementById(
-                        "customerPhone"
-                    )
+                    .getElementById("customerPhone")
                     .value
                     .trim();
 
 
             const message =
                 document
-                    .getElementById(
-                        "customerMessage"
-                    )
+                    .getElementById("customerMessage")
                     .value
                     .trim();
 
@@ -680,10 +737,12 @@ if (orderForm) {
                 );
 
                 return;
+
             }
 
 
             const whatsappMessage =
+
                 "🛍️ *הזמנה חדשה מ-Print3D*\n\n" +
 
                 "👤 *שם:* " +
@@ -695,11 +754,10 @@ if (orderForm) {
                 "\n\n" +
 
                 "📦 *הזמנה:*\n" +
-
                 message;
 
 
-            const whatsappURL =
+            const url =
                 "https://wa.me/" +
                 whatsappNumber +
                 "?text=" +
@@ -709,37 +767,33 @@ if (orderForm) {
 
 
             window.open(
-                whatsappURL,
+                url,
                 "_blank"
             );
 
         }
     );
-
 }
 
 
-// ===============================
-// גלילה למוצרים
-// ===============================
+// ==========================================
+// GO TO PRODUCTS
+// ==========================================
 
 function goToProducts() {
 
-    const productsSection =
-        document.getElementById(
-            "products"
-            );
-    if (productsSection) {
-        productsSection.scrollIntoView({
+    document
+        .getElementById("products")
+        .scrollIntoView({
             behavior: "smooth"
         });
-    }
+
 }
 
 
-// ===============================
-// הפעלה ראשונית
-// ===============================
+// ==========================================
+// START
+// ==========================================
 
 displayProducts();
 
