@@ -64,7 +64,6 @@ const products = [
 
 const coupons = {
     "5839210476": 100
-    "1747232083": 10
 };
 
 const whatsappNumber = "972509996873";
@@ -80,21 +79,18 @@ let appliedCoupon = null;
 
 function displayProducts(list = products) {
 
-    const grid = document.getElementById("productsGrid");
+    const grid =
+        document.getElementById("productsGrid");
 
     if (!grid) return;
 
     grid.innerHTML = "";
 
-    if (!list || list.length === 0) {
+
+    if (list.length === 0) {
 
         grid.innerHTML = `
-            <div style="
-                grid-column:1/-1;
-                text-align:center;
-                padding:50px;
-                font-size:20px;
-            ">
+            <div class="no-products">
                 😕 לא נמצאו מוצרים
             </div>
         `;
@@ -109,26 +105,37 @@ function displayProducts(list = products) {
 
             <div class="product">
 
-                <div class="product-image">
+                <a
+                    href="product.html?id=${product.id}"
+                    class="product-link"
+                >
 
-                    <img
-                        src="${product.image}"
-                        alt="${product.name}"
-                        loading="lazy"
-                    >
+                    <div class="product-image">
 
-                </div>
+                        <img
+                            src="${product.image}"
+                            alt="${product.name}"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+                </a>
 
 
                 <div class="product-info">
 
-                    <h3>
-                        ${product.name}
-                    </h3>
+                    <a
+                        href="product.html?id=${product.id}"
+                        class="product-title-link"
+                    >
+                        <h3>
+                            ${product.name}
+                        </h3>
+                    </a>
 
                     <p>
-                        מוצר איכותי
-                        בהדפסת תלת־ממד
+                        מוצר איכותי בהדפסת תלת־ממד
                     </p>
 
                     <div class="product-price">
@@ -149,6 +156,7 @@ function displayProducts(list = products) {
         `;
 
     });
+
 }
 
 
@@ -162,9 +170,9 @@ function searchProducts() {
         document.getElementById("searchInput");
 
     const search =
-        input
-            ? input.value.toLowerCase().trim()
-            : "";
+        input.value
+            .toLowerCase()
+            .trim();
 
 
     let filtered = products;
@@ -172,32 +180,36 @@ function searchProducts() {
 
     if (currentCategory !== "all") {
 
-        filtered = filtered.filter(
-            product =>
-                product.category === currentCategory
-        );
+        filtered =
+            filtered.filter(
+                product =>
+                    product.category ===
+                    currentCategory
+            );
 
     }
 
 
     if (search !== "") {
 
-        filtered = filtered.filter(
-            product =>
-                product.name
-                    .toLowerCase()
-                    .includes(search)
-        );
+        filtered =
+            filtered.filter(
+                product =>
+                    product.name
+                        .toLowerCase()
+                        .includes(search)
+            );
 
     }
 
 
     displayProducts(filtered);
+
 }
 
 
 // ==========================================
-// CATEGORIES
+// FILTER
 // ==========================================
 
 function filterProducts(category, button) {
@@ -208,28 +220,34 @@ function filterProducts(category, button) {
     document
         .querySelectorAll(".category")
         .forEach(btn => {
+
             btn.classList.remove("active");
+
         });
 
 
     if (button) {
+
         button.classList.add("active");
+
     }
 
 
     searchProducts();
+
 }
 
 
 // ==========================================
-// ADD TO CART
+// CART
 // ==========================================
 
 function addToCart(id) {
 
     const product =
         products.find(
-            product => product.id === id
+            product =>
+                product.id === id
         );
 
 
@@ -241,24 +259,18 @@ function addToCart(id) {
     updateCart();
 
     openCart();
+
 }
 
-
-// ==========================================
-// REMOVE FROM CART
-// ==========================================
 
 function removeFromCart(index) {
 
     cart.splice(index, 1);
 
     updateCart();
+
 }
 
-
-// ==========================================
-// PRODUCTS TOTAL
-// ==========================================
 
 function getProductsTotal() {
 
@@ -277,27 +289,24 @@ function getProductsTotal() {
 
 function getTipPercent() {
 
-    const tip =
+    const select =
         document.getElementById("cartTip");
 
-    if (!tip) return 0;
+    if (!select) return 0;
 
-    return Number(tip.value);
+    return Number(select.value);
+
 }
 
 
 function getTipAmount() {
 
-    const subtotal =
-        getProductsTotal();
-
-    const percent =
-        getTipPercent();
-
-
     return Math.round(
-        subtotal * percent / 100
+        getProductsTotal() *
+        getTipPercent() /
+        100
     );
+
 }
 
 
@@ -314,9 +323,6 @@ function applyCoupon() {
         document.getElementById("couponMessage");
 
 
-    if (!input) return;
-
-
     const code =
         input.value.trim();
 
@@ -329,37 +335,23 @@ function applyCoupon() {
         };
 
 
-        if (message) {
-
-            message.innerHTML =
-                "✅ הקופון הופעל! " +
-                coupons[code] +
-                "% הנחה";
-
-        }
+        message.innerHTML =
+            `✅ הקופון הופעל! ${coupons[code]}% הנחה`;
 
     } else {
 
         appliedCoupon = null;
 
-
-        if (message) {
-
-            message.innerHTML =
-                "❌ קוד קופון לא תקין";
-
-        }
+        message.innerHTML =
+            "❌ קוד קופון לא תקין";
 
     }
 
 
     updateCart();
+
 }
 
-
-// ==========================================
-// COUPON DISCOUNT
-// ==========================================
 
 function getCouponDiscount() {
 
@@ -368,15 +360,12 @@ function getCouponDiscount() {
     }
 
 
-    const subtotal =
-        getProductsTotal();
-
-
     return Math.round(
-        subtotal *
+        getProductsTotal() *
         appliedCoupon.discount /
         100
     );
+
 }
 
 
@@ -386,28 +375,16 @@ function getCouponDiscount() {
 
 function updateCart() {
 
-    const cartCount =
-        document.getElementById("cartCount");
-
     const cartItems =
         document.getElementById("cartItems");
 
-    const productsTotalElement =
-        document.getElementById("productsTotal");
-
-    const discountElement =
-        document.getElementById("couponDiscount");
-
-    const tipTotalElement =
-        document.getElementById("tipTotal");
-
-    const cartTotalElement =
-        document.getElementById("cartTotal");
+    const count =
+        document.getElementById("cartCount");
 
 
-    if (cartCount) {
+    if (count) {
 
-        cartCount.textContent =
+        count.textContent =
             cart.length;
 
     }
@@ -419,17 +396,11 @@ function updateCart() {
     if (cart.length === 0) {
 
         cartItems.innerHTML = `
-
             <div class="empty-cart">
-
                 🛒
-
                 <br><br>
-
                 העגלה שלך ריקה
-
             </div>
-
         `;
 
     } else {
@@ -456,7 +427,7 @@ function updateCart() {
                                 ${product.name}
                             </h4>
 
-                            <div class="cart-item-price">
+                            <div>
                                 ₪${product.price}
                             </div>
 
@@ -488,7 +459,6 @@ function updateCart() {
     const tip =
         getTipAmount();
 
-
     const total =
         Math.max(
             0,
@@ -496,55 +466,77 @@ function updateCart() {
         );
 
 
-    if (productsTotalElement) {
+    const productsTotal =
+        document.getElementById(
+            "productsTotal"
+        );
 
-        productsTotalElement.textContent =
+    const couponDiscount =
+        document.getElementById(
+            "couponDiscount"
+        );
+
+    const tipTotal =
+        document.getElementById(
+            "tipTotal"
+        );
+
+    const cartTotal =
+        document.getElementById(
+            "cartTotal"
+        );
+
+
+    if (productsTotal) {
+
+        productsTotal.textContent =
             subtotal;
 
     }
 
 
-    if (discountElement) {
+    if (couponDiscount) {
 
-        discountElement.textContent =
+        couponDiscount.textContent =
             discount;
 
     }
 
 
-    if (tipTotalElement) {
+    if (tipTotal) {
 
-        tipTotalElement.textContent =
+        tipTotal.textContent =
             tip;
 
     }
 
 
-    if (cartTotalElement) {
+    if (cartTotal) {
 
-        cartTotalElement.textContent =
+        cartTotal.textContent =
             total;
 
     }
+
 }
 
 
 // ==========================================
-// OPEN CART
+// CART OPEN / CLOSE
 // ==========================================
 
 function openCart() {
 
-    const cartElement =
+    const cart =
         document.getElementById("cart");
 
     const overlay =
         document.getElementById("cartOverlay");
 
 
-    if (cartElement) {
+    if (cart) {
 
-        cartElement.classList.add("open");
+        cart.classList.add("open");
 
     }
 
@@ -554,25 +546,22 @@ function openCart() {
         overlay.classList.add("show");
 
     }
+
 }
 
 
-// ==========================================
-// CLOSE CART
-// ==========================================
-
 function closeCart() {
 
-    const cartElement =
+    const cart =
         document.getElementById("cart");
 
     const overlay =
         document.getElementById("cartOverlay");
 
 
-    if (cartElement) {
+    if (cart) {
 
-        cartElement.classList.remove("open");
+        cart.classList.remove("open");
 
     }
 
@@ -582,6 +571,7 @@ function closeCart() {
         overlay.classList.remove("show");
 
     }
+
 }
 
 
@@ -625,7 +615,6 @@ function checkout() {
     const tip =
         getTipAmount();
 
-
     const total =
         Math.max(
             0,
@@ -659,9 +648,8 @@ function checkout() {
 
 
     message +=
-        "\n\n💰 *סה״כ: ₪" +
-        total +
-        "*";
+        "\n\n💰 סה״כ: ₪" +
+        total;
 
 
     const messageBox =
@@ -681,11 +669,20 @@ function checkout() {
     closeCart();
 
 
-    document
-        .getElementById("contact")
-        .scrollIntoView({
+    const contact =
+        document.getElementById(
+            "contact"
+        );
+
+
+    if (contact) {
+
+        contact.scrollIntoView({
             behavior: "smooth"
         });
+
+    }
+
 }
 
 
@@ -694,7 +691,9 @@ function checkout() {
 // ==========================================
 
 const orderForm =
-    document.getElementById("orderForm");
+    document.getElementById(
+        "orderForm"
+    );
 
 
 if (orderForm) {
@@ -708,21 +707,27 @@ if (orderForm) {
 
             const name =
                 document
-                    .getElementById("customerName")
+                    .getElementById(
+                        "customerName"
+                    )
                     .value
                     .trim();
 
 
             const phone =
                 document
-                    .getElementById("customerPhone")
+                    .getElementById(
+                        "customerPhone"
+                    )
                     .value
                     .trim();
 
 
             const message =
                 document
-                    .getElementById("customerMessage")
+                    .getElementById(
+                        "customerMessage"
+                    )
                     .value
                     .trim();
 
@@ -746,15 +751,15 @@ if (orderForm) {
 
                 "🛍️ *הזמנה חדשה מ-Print3D*\n\n" +
 
-                "👤 *שם:* " +
+                "👤 שם: " +
                 name +
                 "\n" +
 
-                "📱 *טלפון:* " +
+                "📱 טלפון: " +
                 phone +
                 "\n\n" +
 
-                "📦 *הזמנה:*\n" +
+                "📦 הזמנה:\n" +
                 message;
 
 
@@ -774,20 +779,160 @@ if (orderForm) {
 
         }
     );
+
 }
 
 
 // ==========================================
-// GO TO PRODUCTS
+// PRODUCT PAGE
+// ==========================================
+
+function loadProductPage() {
+
+    const container =
+        document.getElementById(
+            "productDetails"
+        );
+
+
+    if (!container) return;
+
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const id =
+        Number(
+            params.get("id")
+        );
+
+
+    const product =
+        products.find(
+            product =>
+                product.id === id
+        );
+
+
+    if (!product) {
+
+        container.innerHTML = `
+
+            <div class="no-products">
+
+                😕 המוצר לא נמצא
+
+                <br><br>
+
+                <a href="index.html#products">
+                    חזרה לחנות
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    document.title =
+        product.name +
+        " | Print3D";
+
+
+    container.innerHTML = `
+
+        <div class="product-page">
+
+            <div class="product-page-image">
+
+                <img
+                    src="${product.image}"
+                    alt="${product.name}"
+                >
+
+            </div>
+
+
+            <div class="product-page-info">
+
+                <span class="product-category">
+                    ${getCategoryName(product.category)}
+                </span>
+
+                <h1>
+                    ${product.name}
+                </h1>
+
+                <div class="product-page-price">
+                    ₪${product.price}
+                </div>
+
+                <p>
+                    מוצר איכותי בהדפסת תלת־ממד.
+                    מתאים לבית, לחדר או כמתנה.
+                </p>
+
+                <button
+                    class="add-button large"
+                    onclick="addToCart(${product.id})"
+                >
+                    🛒 הוסף לעגלה
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+function getCategoryName(category) {
+
+    const names = {
+
+        fidget: "🌀 פידג'טים",
+
+        keychain: "🔑 מחזיקי מפתחות",
+
+        phone: "📱 מעמדים",
+
+        room: "🏠 לחדר"
+
+    };
+
+
+    return names[category] || "מוצר";
+
+}
+
+
+// ==========================================
+// SCROLL
 // ==========================================
 
 function goToProducts() {
 
-    document
-        .getElementById("products")
-        .scrollIntoView({
+    const section =
+        document.getElementById(
+            "products"
+        );
+
+
+    if (section) {
+
+        section.scrollIntoView({
             behavior: "smooth"
         });
+
+    }
 
 }
 
@@ -799,3 +944,5 @@ function goToProducts() {
 displayProducts();
 
 updateCart();
+
+loadProductPage();
