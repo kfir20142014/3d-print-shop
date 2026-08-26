@@ -533,33 +533,3 @@ document
 
 
 updateCart();
-
-// ===============================
-// פתיחת עמוד מוצר בלחיצה
-// ===============================
-
-document.addEventListener("click", function (event) {
-
-    const card = event.target.closest(".product");
-
-    if (!card) return;
-
-    // אם לחצו על כפתור הוספה לעגלה — לא עוברים לעמוד המוצר
-    if (event.target.closest(".add-button")) {
-        return;
-    }
-
-    const image = card.querySelector("img");
-
-    if (!image) return;
-
-    // מוצא את מספר המוצר מתוך images/1.jpg
-    const match = image.src.match(/\/(\d+)\.jpg/i);
-
-    if (!match) return;
-
-    const productId = match[1];
-
-    window.location.href =
-        "product.html?id=" + productId;
-});
