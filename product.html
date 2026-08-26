@@ -1,38 +1,45 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>מוצר | Print3D</title>
 
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
 <header>
+
     <div class="logo">
         Print<span>3D</span>
     </div>
 
     <nav>
-        <a href="index.html#home">בית</a>
+        <a href="index.html">בית</a>
         <a href="index.html#products">מוצרים</a>
-        <a href="index.html#contact">הזמנה</a>
     </nav>
 
-    <button class="cart-button" id="openCartButton">
-        🛒 עגלה <span id="cartCount">0</span>
+    <button id="cartButton" class="cart-button">
+        🛒 עגלה <b id="cartCount">0</b>
     </button>
+
 </header>
 
 
-<main class="single-product-page">
+<main class="product-page-container">
 
-    <a href="index.html#products" class="back-link">
-        ← חזרה לחנות
+    <a href="index.html#products" class="back">
+        ← חזרה למוצרים
     </a>
 
     <div id="productDetails"></div>
@@ -40,7 +47,7 @@
 </main>
 
 
-<div id="cartOverlay"></div>
+<div id="overlay"></div>
 
 
 <aside id="cart">
@@ -49,21 +56,19 @@
 
         <h2>🛒 העגלה</h2>
 
-        <button id="closeCartButton">
-            ✕
-        </button>
+        <button id="closeCart">✕</button>
 
     </div>
 
-    <div id="cartItems"></div>
+    <div id="cartItems" class="cart-items"></div>
 
     <div class="cart-bottom">
 
-        <div class="tip-cart">
+        <div class="tip-row">
 
             <span>💝 טיפ</span>
 
-            <select id="cartTip">
+            <select id="tipSelect">
                 <option value="0">ללא טיפ</option>
                 <option value="5">5%</option>
                 <option value="10">10%</option>
@@ -73,61 +78,50 @@
 
         </div>
 
+        <div class="coupon">
 
-        <div class="coupon-box">
+            <input
+                id="couponInput"
+                type="text"
+                inputmode="numeric"
+                maxlength="10"
+                placeholder="קוד קופון"
+            >
 
-            <label for="couponInput">
-                🎟️ קוד קופון
-            </label>
-
-            <div class="coupon-row">
-
-                <input
-                    id="couponInput"
-                    type="text"
-                    maxlength="10"
-                    inputmode="numeric"
-                    placeholder="הזן קוד"
-                >
-
-                <button id="couponButton">
-                    הפעל
-                </button>
-
-            </div>
-
-            <div id="couponMessage"></div>
+            <button id="couponButton">
+                הפעל
+            </button>
 
         </div>
 
+        <div id="couponMessage"></div>
 
-        <div class="cart-summary">
+        <div class="summary">
 
             <div>
-                <span>מוצרים:</span>
-                <span>₪<span id="productsTotal">0</span></span>
+                <span>מחיר מוצרים</span>
+                <span>₪<b id="subtotal">0</b></span>
             </div>
 
             <div>
-                <span>הנחה:</span>
-                <span>-₪<span id="couponDiscount">0</span></span>
+                <span>הנחה</span>
+                <span>₪<b id="discount">0</b></span>
             </div>
 
             <div>
-                <span>טיפ:</span>
-                <span>₪<span id="tipTotal">0</span></span>
+                <span>טיפ</span>
+                <span>₪<b id="tipAmount">0</b></span>
             </div>
 
-            <div class="final-total">
-                <strong>סה״כ:</strong>
-                <strong>₪<span id="cartTotal">0</span></strong>
+            <div class="total">
+                <span>סה״כ</span>
+                <span>₪<b id="total">0</b></span>
             </div>
 
         </div>
-
 
         <button id="checkoutButton" class="checkout-button">
-            📱 המשך להזמנה
+            המשך להזמנה
         </button>
 
     </div>
@@ -135,551 +129,7 @@
 </aside>
 
 
-<footer>
-
-    <div class="logo">
-        Print<span>3D</span>
-    </div>
-
-    <p>
-        חנות מוצרי תלת־ממד
-    </p>
-
-</footer>
-
-
-<script>
-/* המוצרים נמצאים בתוך index.html, לכן כאן אנחנו משתמשים
-   בפרטים של 50 המוצרים שוב לצורך עמוד המוצר */
-
-const products = [
-    {id:1,name:"Twist Fidget",category:"fidget",price:25,image:"images/1.jpg",description:"פידג'ט מגניב ונוח לשימוש."},
-    {id:2,name:"Infinity Cube",category:"fidget",price:30,image:"images/2.jpg",description:"קוביית פידג'ט מתקפלת ומהנה."},
-    {id:3,name:"Fidget Ring",category:"fidget",price:20,image:"images/3.jpg",description:"טבעת פידג'ט מסתובבת."},
-    {id:4,name:"Fidget Ball",category:"fidget",price:30,image:"images/4.jpg",description:"פידג'ט כדורי קטן."},
-    {id:5,name:"Helix Fidget",category:"fidget",price:35,image:"images/5.jpg",description:"פידג'ט בעיצוב סלילי."},
-    {id:6,name:"Vortex Fidget",category:"fidget",price:35,image:"images/6.jpg",description:"פידג'ט מסתובב בעיצוב מיוחד."},
-    {id:7,name:"Triple Helix",category:"fidget",price:40,image:"images/7.jpg",description:"פידג'ט תלת־סלילי."},
-    {id:8,name:"Spinning Fidget",category:"fidget",price:30,image:"images/8.jpg",description:"פידג'ט מסתובב קטן."},
-    {id:9,name:"Impossible Sphere",category:"fidget",price:40,image:"images/9.jpg",description:"כדור תלת־ממדי מיוחד."},
-    {id:10,name:"Fidget Cube",category:"fidget",price:30,image:"images/10.jpg",description:"קוביית פידג'ט."},
-
-    {id:11,name:"Dragon Keychain",category:"keychain",price:25,image:"images/11.jpg",description:"מחזיק מפתחות דרקון."},
-    {id:12,name:"Octopus Keychain",category:"keychain",price:20,image:"images/12.jpg",description:"מחזיק מפתחות תמנון."},
-    {id:13,name:"Heart Keychain",category:"keychain",price:15,image:"images/13.jpg",description:"מחזיק מפתחות בצורת לב."},
-    {id:14,name:"Crystal Keychain",category:"keychain",price:20,image:"images/14.jpg",description:"מחזיק מפתחות קריסטל."},
-    {id:15,name:"T-Rex Keychain",category:"keychain",price:25,image:"images/15.jpg",description:"מחזיק מפתחות דינוזאור."},
-    {id:16,name:"Dinosaur Keychain",category:"keychain",price:25,image:"images/16.jpg",description:"מחזיק מפתחות דינוזאור קטן."},
-    {id:17,name:"Cat Keychain",category:"keychain",price:20,image:"images/17.jpg",description:"מחזיק מפתחות חתול."},
-    {id:18,name:"Dog Keychain",category:"keychain",price:20,image:"images/18.jpg",description:"מחזיק מפתחות כלב."},
-    {id:19,name:"Game Controller Keychain",category:"keychain",price:25,image:"images/19.jpg",description:"מחזיק מפתחות בסגנון גיימינג."},
-    {id:20,name:"Rocket Keychain",category:"keychain",price:20,image:"images/20.jpg",description:"מחזיק מפתחות רקטה."},
-
-    {id:21,name:"Phone Stand",category:"phone",price:35,image:"images/21.jpg",description:"מעמד לטלפון."},
-    {id:22,name:"Foldable Phone Stand",category:"phone",price:35,image:"images/22.jpg",description:"מעמד טלפון מתקפל."},
-    {id:23,name:"Desk Phone Stand",category:"phone",price:30,image:"images/23.jpg",description:"מעמד לטלפון לשולחן."},
-    {id:24,name:"Tablet Stand",category:"phone",price:50,image:"images/24.jpg",description:"מעמד לטאבלט."},
-    {id:25,name:"Phone Riser",category:"phone",price:35,image:"images/25.jpg",description:"מעמד מוגבה לטלפון."},
-    {id:26,name:"Vertical Phone Stand",category:"phone",price:40,image:"images/26.jpg",description:"מעמד אנכי לטלפון."},
-    {id:27,name:"Gaming Phone Stand",category:"phone",price:45,image:"images/27.jpg",description:"מעמד לטלפון בסגנון גיימינג."},
-    {id:28,name:"Minimal Phone Stand",category:"phone",price:30,image:"images/28.jpg",description:"מעמד טלפון מינימליסטי."},
-    {id:29,name:"Phone Dock",category:"phone",price:40,image:"images/29.jpg",description:"תחנת עגינה לטלפון."},
-    {id:30,name:"Phone Charging Stand",category:"phone",price:45,image:"images/30.jpg",description:"מעמד לטלפון עם מקום לטעינה."},
-
-    {id:31,name:"Desk Organizer",category:"room",price:45,image:"images/31.jpg",description:"ארגונית לשולחן."},
-    {id:32,name:"Cable Organizer",category:"room",price:20,image:"images/32.jpg",description:"ארגונית לכבלים."},
-    {id:33,name:"Cable Clips",category:"room",price:15,image:"images/33.jpg",description:"קליפסים לסידור כבלים."},
-    {id:34,name:"Pencil Organizer",category:"room",price:30,image:"images/34.jpg",description:"מחזיק עטים."},
-    {id:35,name:"Desk Tray",category:"room",price:40,image:"images/35.jpg",description:"מגש קטן לשולחן."},
-    {id:36,name:"Monitor Stand",category:"room",price:65,image:"images/36.jpg",description:"מעמד למסך."},
-    {id:37,name:"Headphone Stand",category:"room",price:50,image:"images/37.jpg",description:"מעמד לאוזניות."},
-    {id:38,name:"Under Desk Drawer",category:"room",price:55,image:"images/38.jpg",description:"מגירה מתחת לשולחן."},
-    {id:39,name:"Wall Organizer",category:"room",price:45,image:"images/39.jpg",description:"ארגונית לתלייה על הקיר."},
-    {id:40,name:"Hexagon Organizer",category:"room",price:35,image:"images/40.jpg",description:"ארגונית בעיצוב משושה."},
-    {id:41,name:"Mini Trash Can",category:"room",price:30,image:"images/41.jpg",description:"פח קטן לשולחן."},
-    {id:42,name:"Mini Plant Pot",category:"room",price:25,image:"images/42.jpg",description:"עציץ קטן."},
-    {id:43,name:"Desk Lamp Stand",category:"room",price:40,image:"images/43.jpg",description:"מעמד דקורטיבי למנורה."},
-    {id:44,name:"Controller Stand",category:"room",price:45,image:"images/44.jpg",description:"מעמד לבקר משחק."},
-    {id:45,name:"Game Controller Holder",category:"room",price:50,image:"images/45.jpg",description:"מחזיק לבקר משחק."},
-    {id:46,name:"Wall Hook",category:"room",price:20,image:"images/46.jpg",description:"וו לתלייה."},
-    {id:47,name:"Mini Storage Box",category:"room",price:35,image:"images/47.jpg",description:"קופסת אחסון קטנה."},
-    {id:48,name:"Coin Tray",category:"room",price:25,image:"images/48.jpg",description:"מגש קטן לחפצים."},
-    {id:49,name:"Desk Pen Holder",category:"room",price:30,image:"images/49.jpg",description:"מחזיק עטים לשולחן."},
-    {id:50,name:"Spinning Organizer",category:"room",price:45,image:"images/50.jpg",description:"ארגונית מסתובבת."}
-];
-
-
-const whatsappNumber = "972509996873";
-
-const coupons = {
-    "5839210476": 100
-};
-
-let cart = [];
-let appliedCoupon = null;
-
-
-function getProduct(id) {
-    return products.find(product => product.id === id);
-}
-
-
-function getProductsTotal() {
-    return cart.reduce(
-        (sum, product) => sum + product.price,
-        0
-    );
-}
-
-
-function getTipPercent() {
-    return Number(
-        document.getElementById("cartTip").value
-    );
-}
-
-
-function getTipAmount() {
-    return Math.round(
-        getProductsTotal() *
-        getTipPercent() /
-        100
-    );
-}
-
-
-function getCouponDiscount() {
-
-    if (!appliedCoupon) {
-        return 0;
-    }
-
-    return Math.round(
-        getProductsTotal() *
-        appliedCoupon.discount /
-        100
-    );
-}
-
-
-function updateCart() {
-
-    const items = document.getElementById("cartItems");
-
-    document.getElementById("cartCount").textContent =
-        cart.length;
-
-
-    if (cart.length === 0) {
-
-        items.innerHTML = `
-            <div class="empty-cart">
-                🛒
-                <br><br>
-                העגלה שלך ריקה
-            </div>
-        `;
-
-    } else {
-
-        items.innerHTML = "";
-
-        cart.forEach((product, index) => {
-
-            const row =
-                document.createElement("div");
-
-            row.className = "cart-item";
-
-            row.innerHTML = `
-                <img
-                    src="${product.image}"
-                    class="cart-item-image"
-                    alt="${product.name}"
-                >
-
-                <div class="cart-item-info">
-                    <strong>${product.name}</strong>
-                    <div>₪${product.price}</div>
-                </div>
-
-                <button class="remove-button">
-                    ✕
-                </button>
-            `;
-
-            row.querySelector(
-                ".remove-button"
-            ).addEventListener(
-                "click",
-                () => {
-                    cart.splice(index, 1);
-                    updateCart();
-                }
-            );
-
-            items.appendChild(row);
-        });
-    }
-
-
-    const subtotal = getProductsTotal();
-
-    const discount = getCouponDiscount();
-
-    const tip = getTipAmount();
-
-    const total = Math.max(
-        0,
-        subtotal - discount + tip
-    );
-
-
-    document.getElementById(
-        "productsTotal"
-    ).textContent = subtotal;
-
-
-    document.getElementById(
-        "couponDiscount"
-    ).textContent = discount;
-
-
-    document.getElementById(
-        "tipTotal"
-    ).textContent = tip;
-
-
-    document.getElementById(
-        "cartTotal"
-    ).textContent = total;
-}
-
-
-function openCart() {
-
-    document
-        .getElementById("cart")
-        .classList.add("open");
-
-    document
-        .getElementById("cartOverlay")
-        .classList.add("show");
-}
-
-
-function closeCart() {
-
-    document
-        .getElementById("cart")
-        .classList.remove("open");
-
-    document
-        .getElementById("cartOverlay")
-        .classList.remove("show");
-}
-
-
-function addToCart(id) {
-
-    const product = getProduct(id);
-
-    if (!product) {
-        return;
-    }
-
-    cart.push(product);
-
-    updateCart();
-
-    openCart();
-}
-
-
-function applyCoupon() {
-
-    const code =
-        document
-            .getElementById("couponInput")
-            .value
-            .trim();
-
-    const message =
-        document.getElementById(
-            "couponMessage"
-        );
-
-
-    if (coupons[code] !== undefined) {
-
-        appliedCoupon = {
-            code: code,
-            discount: coupons[code]
-        };
-
-        message.textContent =
-            `✅ הקופון הופעל! ${coupons[code]}% הנחה`;
-
-    } else {
-
-        appliedCoupon = null;
-
-        message.textContent =
-            "❌ קוד קופון לא תקין";
-    }
-
-    updateCart();
-}
-
-
-function createOrderText() {
-
-    let text =
-        "שלום! אני רוצה להזמין:\n\n";
-
-
-    cart.forEach(product => {
-
-        text +=
-            `• ${product.name} - ₪${product.price}\n`;
-
-    });
-
-
-    const subtotal =
-        getProductsTotal();
-
-    const discount =
-        getCouponDiscount();
-
-    const tip =
-        getTipAmount();
-
-
-    const total =
-        Math.max(
-            0,
-            subtotal - discount + tip
-        );
-
-
-    text +=
-        `\n💵 מחיר מוצרים: ₪${subtotal}`;
-
-
-    if (appliedCoupon) {
-
-        text +=
-            `\n🎟️ קופון: ${appliedCoupon.code}` +
-            `\n💸 הנחה: -₪${discount}`;
-
-    }
-
-
-    if (tip > 0) {
-
-        text +=
-            `\n💝 טיפ: ₪${tip}`;
-
-    }
-
-
-    text +=
-        `\n\n💰 סה״כ: ₪${total}`;
-
-
-    return text;
-}
-
-
-function checkout() {
-
-    if (cart.length === 0) {
-
-        alert("העגלה שלך ריקה 🛒");
-
-        return;
-    }
-
-
-    const messageBox =
-        document.getElementById(
-            "customerMessage"
-        );
-
-
-    if (messageBox) {
-
-        messageBox.value =
-            createOrderText();
-
-    }
-
-
-    closeCart();
-
-
-    window.location.href =
-        "index.html#contact";
-}
-
-
-// עמוד מוצר
-
-const params =
-    new URLSearchParams(
-        window.location.search
-    );
-
-
-const productId =
-    Number(
-        params.get("id")
-    );
-
-
-const product =
-    getProduct(productId);
-
-
-const details =
-    document.getElementById(
-        "productDetails"
-    );
-
-
-if (product && details) {
-
-    document.title =
-        product.name + " | Print3D";
-
-
-    details.innerHTML = `
-
-        <div class="product-page">
-
-            <div class="product-page-image">
-
-                <img
-                    src="${product.image}"
-                    alt="${product.name}"
-                >
-
-            </div>
-
-
-            <div class="product-page-info">
-
-                <div class="small-title">
-                    PRINT3D
-                </div>
-
-                <h1>
-                    ${product.name}
-                </h1>
-
-                <div class="product-page-price">
-                    ₪${product.price}
-                </div>
-
-                <p>
-                    ${product.description}
-                </p>
-
-                <button
-                    class="add-button large"
-                    id="productAddButton"
-                >
-                    🛒 הוסף לעגלה
-                </button>
-
-            </div>
-
-        </div>
-    `;
-
-
-    document
-        .getElementById(
-            "productAddButton"
-        )
-        .addEventListener(
-            "click",
-            () => addToCart(product.id)
-        );
-
-} else if (details) {
-
-    details.innerHTML = `
-        <div class="no-products">
-            😕 המוצר לא נמצא
-        </div>
-    `;
-}
-
-
-document
-    .getElementById(
-        "openCartButton"
-    )
-    .addEventListener(
-        "click",
-        openCart
-    );
-
-
-document
-    .getElementById(
-        "closeCartButton"
-    )
-    .addEventListener(
-        "click",
-        closeCart
-    );
-
-
-document
-    .getElementById(
-        "cartOverlay"
-    )
-    .addEventListener(
-        "click",
-        closeCart
-    );
-
-
-document
-    .getElementById(
-        "checkoutButton"
-    )
-    .addEventListener(
-        "click",
-        checkout
-    );
-
-
-document
-    .getElementById(
-        "couponButton"
-    )
-    .addEventListener(
-        "click",
-        applyCoupon
-    );
-
-
-document
-    .getElementById(
-        "cartTip"
-    )
-    .addEventListener(
-        "change",
-        updateCart
-    );
-
-
-updateCart();
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
