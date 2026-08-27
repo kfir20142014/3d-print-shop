@@ -1,225 +1,108 @@
-// ======================================
-// PRINT3D
-// ======================================
+// ================================
+// Print3D - כל המוצרים
+// ================================
 
-const WHATSAPP = "972509996873";
+const products = [
+    { id: 1, name: "מוצר תלת־ממד 1", price: 20, category: "פידג'טים", image: "images/1.jpg" },
+    { id: 2, name: "מוצר תלת־ממד 2", price: 25, category: "פידג'טים", image: "images/2.jpg" },
+    { id: 3, name: "מוצר תלת־ממד 3", price: 30, category: "פידג'טים", image: "images/3.jpg" },
+    { id: 4, name: "מוצר תלת־ממד 4", price: 35, category: "פידג'טים", image: "images/4.jpg" },
+    { id: 5, name: "מוצר תלת־ממד 5", price: 40, category: "פידג'טים", image: "images/5.jpg" },
 
-// שנה כאן את הקוד אם תרצה קופון אחר
-const COUPON_CODE = "5839210476";
+    { id: 6, name: "מוצר תלת־ממד 6", price: 20, category: "פידג'טים", image: "images/6.jpg" },
+    { id: 7, name: "מוצר תלת־ממד 7", price: 25, category: "פידג'טים", image: "images/7.jpg" },
+    { id: 8, name: "מוצר תלת־ממד 8", price: 30, category: "פידג'טים", image: "images/8.jpg" },
+    { id: 9, name: "מוצר תלת־ממד 9", price: 35, category: "פידג'טים", image: "images/9.jpg" },
+    { id: 10, name: "מוצר תלת־ממד 10", price: 40, category: "פידג'טים", image: "images/10.jpg" },
 
-// 100% הנחה
-const COUPON_PERCENT = 100;
+    { id: 11, name: "מוצר תלת־ממד 11", price: 20, category: "מחזיקי מפתחות", image: "images/11.jpg" },
+    { id: 12, name: "מוצר תלת־ממד 12", price: 25, category: "מחזיקי מפתחות", image: "images/12.jpg" },
+    { id: 13, name: "מוצר תלת־ממד 13", price: 30, category: "מחזיקי מפתחות", image: "images/13.jpg" },
+    { id: 14, name: "מוצר תלת־ממד 14", price: 35, category: "מחזיקי מפתחות", image: "images/14.jpg" },
+    { id: 15, name: "מוצר תלת־ממד 15", price: 40, category: "מחזיקי מפתחות", image: "images/15.jpg" },
+
+    { id: 16, name: "מוצר תלת־ממד 16", price: 20, category: "מחזיקי מפתחות", image: "images/16.jpg" },
+    { id: 17, name: "מוצר תלת־ממד 17", price: 25, category: "מחזיקי מפתחות", image: "images/17.jpg" },
+    { id: 18, name: "מוצר תלת־ממד 18", price: 30, category: "מחזיקי מפתחות", image: "images/18.jpg" },
+    { id: 19, name: "מוצר תלת־ממד 19", price: 35, category: "מחזיקי מפתחות", image: "images/19.jpg" },
+    { id: 20, name: "מוצר תלת־ממד 20", price: 40, category: "מחזיקי מפתחות", image: "images/20.jpg" },
+
+    { id: 21, name: "מוצר תלת־ממד 21", price: 20, category: "אביזרים", image: "images/21.jpg" },
+    { id: 22, name: "מוצר תלת־ממד 22", price: 25, category: "אביזרים", image: "images/22.jpg" },
+    { id: 23, name: "מוצר תלת־ממד 23", price: 30, category: "אביזרים", image: "images/23.jpg" },
+    { id: 24, name: "מוצר תלת־ממד 24", price: 35, category: "אביזרים", image: "images/24.jpg" },
+    { id: 25, name: "מוצר תלת־ממד 25", price: 40, category: "אביזרים", image: "images/25.jpg" },
+
+    { id: 26, name: "מוצר תלת־ממד 26", price: 20, category: "אביזרים", image: "images/26.jpg" },
+    { id: 27, name: "מוצר תלת־ממד 27", price: 25, category: "אביזרים", image: "images/27.jpg" },
+    { id: 28, name: "מוצר תלת־ממד 28", price: 30, category: "אביזרים", image: "images/28.jpg" },
+    { id: 29, name: "מוצר תלת־ממד 29", price: 35, category: "אביזרים", image: "images/29.jpg" },
+    { id: 30, name: "מוצר תלת־ממד 30", price: 40, category: "אביזרים", image: "images/30.jpg" },
+
+    { id: 31, name: "מוצר תלת־ממד 31", price: 20, category: "שולחן", image: "images/31.jpg" },
+    { id: 32, name: "מוצר תלת־ממד 32", price: 25, category: "שולחן", image: "images/32.jpg" },
+    { id: 33, name: "מוצר תלת־ממד 33", price: 30, category: "שולחן", image: "images/33.jpg" },
+    { id: 34, name: "מוצר תלת־ממד 34", price: 35, category: "שולחן", image: "images/34.jpg" },
+    { id: 35, name: "מוצר תלת־ממד 35", price: 40, category: "שולחן", image: "images/35.jpg" },
+
+    { id: 36, name: "מוצר תלת־ממד 36", price: 20, category: "שולחן", image: "images/36.jpg" },
+    { id: 37, name: "מוצר תלת־ממד 37", price: 25, category: "שולחן", image: "images/37.jpg" },
+    { id: 38, name: "מוצר תלת־ממד 38", price: 30, category: "שולחן", image: "images/38.jpg" },
+    { id: 39, name: "מוצר תלת־ממד 39", price: 35, category: "שולחן", image: "images/39.jpg" },
+    { id: 40, name: "מוצר תלת־ממד 40", price: 40, category: "שולחן", image: "images/40.jpg" },
+
+    { id: 41, name: "מוצר תלת־ממד 41", price: 20, category: "אחר", image: "images/41.jpg" },
+    { id: 42, name: "מוצר תלת־ממד 42", price: 25, category: "אחר", image: "images/42.jpg" },
+    { id: 43, name: "מוצר תלת־ממד 43", price: 30, category: "אחר", image: "images/43.jpg" },
+    { id: 44, name: "מוצר תלת־ממד 44", price: 35, category: "אחר", image: "images/44.jpg" },
+    { id: 45, name: "מוצר תלת־ממד 45", price: 40, category: "אחר", image: "images/45.jpg" },
+
+    { id: 46, name: "מוצר תלת־ממד 46", price: 20, category: "אחר", image: "images/46.jpg" },
+    { id: 47, name: "מוצר תלת־ממד 47", price: 25, category: "אחר", image: "images/47.jpg" },
+    { id: 48, name: "מוצר תלת־ממד 48", price: 30, category: "אחר", image: "images/48.jpg" },
+    { id: 49, name: "מוצר תלת־ממד 49", price: 35, category: "אחר", image: "images/49.jpg" },
+    { id: 50, name: "מוצר תלת־ממד 50", price: 40, category: "אחר", image: "images/50.jpg" }
+];
 
 
-// ======================================
-// מוצרים
-// ======================================
-
-const products = [];
-
-for (let i = 1; i <= 50; i++) {
-
-    let category;
-
-    if (i <= 10) {
-        category = "פידג'טים";
-    } else if (i <= 20) {
-        category = "מחזיקי מפתחות";
-    } else if (i <= 30) {
-        category = "אביזרים";
-    } else if (i <= 40) {
-        category = "שולחן";
-    } else {
-        category = "אחר";
-    }
-
-    products.push({
-
-        id: i,
-
-        name: "מוצר תלת־ממד " + i,
-
-        price: 20 + ((i - 1) % 10) * 5,
-
-        category: category,
-
-        image: "images/" + i + ".jpg",
-
-        description:
-            "מוצר תלת־ממד מגניב ואיכותי בעיצוב מיוחד."
-
-    });
-
-}
-
-
-// ======================================
-// משתנים
-// ======================================
+// ================================
+// עגלה
+// ================================
 
 let cart = [];
 
-let selectedCategory = "הכול";
-
-let couponApplied = false;
-
-
-// ======================================
-// שמירה
-// ======================================
-
-function saveCart() {
-
-    localStorage.setItem(
-        "print3dCart",
-        JSON.stringify(cart)
-    );
-
+try {
+    cart = JSON.parse(localStorage.getItem("print3dCart")) || [];
+} catch {
+    cart = [];
 }
 
 
-// ======================================
-// טעינה
-// ======================================
+// ================================
+// הצגת מוצרים
+// ================================
 
-function loadCart() {
+function showProducts(list = products) {
 
-    try {
+    const container = document.getElementById("products");
 
-        const saved =
-            localStorage.getItem("print3dCart");
+    if (!container) return;
 
-        if (saved) {
-            cart = JSON.parse(saved);
-        }
+    container.innerHTML = "";
 
-    } catch {
+    list.forEach(product => {
 
-        cart = [];
-
-    }
-
-}
-
-
-// ======================================
-// קטגוריות
-// ======================================
-
-function renderCategories() {
-
-    const box =
-        document.getElementById("categories");
-
-    if (!box) return;
-
-    const categories = [
-        "הכול",
-        ...new Set(
-            products.map(p => p.category)
-        )
-    ];
-
-    box.innerHTML = "";
-
-    categories.forEach(category => {
-
-        const button =
-            document.createElement("button");
-
-        button.className = "category";
-
-        if (category === selectedCategory) {
-            button.classList.add("active");
-        }
-
-        button.textContent = category;
-
-        button.onclick = () => {
-
-            selectedCategory = category;
-
-            renderCategories();
-            renderProducts();
-
-        };
-
-        box.appendChild(button);
-
-    });
-
-}
-
-
-// ======================================
-// מוצרים
-// ======================================
-
-function renderProducts() {
-
-    const grid =
-        document.getElementById("products");
-
-    if (!grid) return;
-
-    const search =
-        document
-            .getElementById("search")
-            ?.value
-            .trim()
-            .toLowerCase() || "";
-
-
-    const filtered =
-        products.filter(product => {
-
-            const searchMatch =
-                product.name
-                    .toLowerCase()
-                    .includes(search);
-
-            const categoryMatch =
-                selectedCategory === "הכול" ||
-                product.category === selectedCategory;
-
-            return searchMatch && categoryMatch;
-
-        });
-
-
-    grid.innerHTML = "";
-
-
-    if (filtered.length === 0) {
-
-        grid.innerHTML =
-            `<div class="empty">
-                😕 לא נמצאו מוצרים
-            </div>`;
-
-        return;
-
-    }
-
-
-    filtered.forEach(product => {
-
-        const card =
-            document.createElement("article");
+        const card = document.createElement("div");
 
         card.className = "product-card";
 
-
         card.innerHTML = `
-
-            <div
-                class="product-img"
-                data-id="${product.id}"
-            >
+            <div class="product-img">
                 <img
                     src="${product.image}"
                     alt="${product.name}"
                     loading="lazy"
+                    onerror="this.src='https://via.placeholder.com/500x500?text=3D+Product'"
                 >
             </div>
 
@@ -227,9 +110,7 @@ function renderProducts() {
 
                 <h3>${product.name}</h3>
 
-                <p>
-                    ${product.description}
-                </p>
+                <p>${product.category}</p>
 
                 <div class="price">
                     ₪${product.price}
@@ -240,153 +121,131 @@ function renderProducts() {
                 </button>
 
             </div>
-
         `;
 
+        card.querySelector(".product-img").onclick = () => {
+            window.location.href = `product.html?id=${product.id}`;
+        };
 
-        card
-            .querySelector(".product-img")
-            .onclick = () => {
+        card.querySelector(".add").onclick = event => {
+            event.stopPropagation();
+            addToCart(product.id);
+        };
 
-                window.location.href =
-                    "product.html?id=" +
-                    product.id;
-
-            };
-
-
-        card
-            .querySelector(".add")
-            .onclick = event => {
-
-                event.stopPropagation();
-
-                addToCart(product.id);
-
-            };
-
-
-        grid.appendChild(card);
-
+        container.appendChild(card);
     });
-
 }
 
 
-// ======================================
-// הוספה
-// ======================================
+// ================================
+// קטגוריות
+// ================================
+
+function showCategories() {
+
+    const container = document.getElementById("categories");
+
+    if (!container) return;
+
+    const categories = [
+        "הכול",
+        ...new Set(products.map(product => product.category))
+    ];
+
+    container.innerHTML = "";
+
+    categories.forEach(category => {
+
+        const button = document.createElement("button");
+
+        button.className = "category";
+
+        button.textContent = category;
+
+        button.onclick = () => {
+
+            if (category === "הכול") {
+                showProducts(products);
+            } else {
+                showProducts(
+                    products.filter(
+                        product => product.category === category
+                    )
+                );
+            }
+        };
+
+        container.appendChild(button);
+    });
+}
+
+
+// ================================
+// חיפוש
+// ================================
+
+const search = document.getElementById("search");
+
+if (search) {
+
+    search.addEventListener("input", () => {
+
+        const text = search.value.toLowerCase().trim();
+
+        const results = products.filter(product =>
+            product.name.toLowerCase().includes(text) ||
+            product.category.toLowerCase().includes(text)
+        );
+
+        showProducts(results);
+    });
+}
+
+
+// ================================
+// הוספה לעגלה
+// ================================
 
 function addToCart(id) {
 
-    const product =
-        products.find(
-            p => p.id === id
-        );
+    const product = products.find(
+        product => product.id === id
+    );
 
     if (!product) return;
 
     cart.push(product);
 
-    saveCart();
+    localStorage.setItem(
+        "print3dCart",
+        JSON.stringify(cart)
+    );
 
     updateCart();
 
     openCart();
-
 }
 
 
-// ======================================
-// הסרה
-// ======================================
-
-function removeFromCart(index) {
-
-    cart.splice(index, 1);
-
-    saveCart();
-
-    updateCart();
-
-}
-
-
-// ======================================
-// סכום
-// ======================================
-
-function subtotal() {
-
-    return cart.reduce(
-        (sum, product) =>
-            sum + product.price,
-        0
-    );
-
-}
-
-
-// ======================================
-// טיפ
-// ======================================
-
-function getTip() {
-
-    const select =
-        document.getElementById("tip");
-
-    if (!select) return 0;
-
-    const percent =
-        Number(select.value);
-
-    return Math.round(
-        subtotal() * percent / 100
-    );
-
-}
-
-
-// ======================================
-// הנחה
-// ======================================
-
-function getDiscount() {
-
-    if (!couponApplied) {
-        return 0;
-    }
-
-    return subtotal() *
-        COUPON_PERCENT / 100;
-
-}
-
-
-// ======================================
+// ================================
 // עדכון עגלה
-// ======================================
+// ================================
 
 function updateCart() {
 
-    const items =
-        document.getElementById("cartItems");
-
-    if (!items) return;
-
-
-    const count =
-        document.getElementById("cartCount");
+    const count = document.getElementById("cartCount");
 
     if (count) {
         count.textContent = cart.length;
     }
 
+    const container = document.getElementById("cartItems");
+
+    if (!container) return;
 
     if (cart.length === 0) {
 
-        items.innerHTML = `
+        container.innerHTML = `
             <div class="empty">
                 🛒
                 <br><br>
@@ -394,502 +253,226 @@ function updateCart() {
             </div>
         `;
 
-    } else {
+        updatePrices();
 
-        items.innerHTML = "";
-
-        cart.forEach((product, index) => {
-
-            const item =
-                document.createElement("div");
-
-            item.className = "cart-item";
-
-
-            item.innerHTML = `
-
-                <img
-                    src="${product.image}"
-                    alt="${product.name}"
-                >
-
-                <div class="cart-item-info">
-
-                    <strong>
-                        ${product.name}
-                    </strong>
-
-                    <div>
-                        ₪${product.price}
-                    </div>
-
-                </div>
-
-                <button class="remove">
-                    ✕
-                </button>
-
-            `;
-
-
-            item
-                .querySelector(".remove")
-                .onclick = () => {
-
-                    removeFromCart(index);
-
-                };
-
-
-            items.appendChild(item);
-
-        });
-
+        return;
     }
 
+    container.innerHTML = "";
 
-    const sub = subtotal();
+    cart.forEach((product, index) => {
 
-    const discount = getDiscount();
+        const item = document.createElement("div");
 
-    const tip = getTip();
+        item.className = "cart-item";
+
+        item.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+
+            <div class="cart-item-info">
+                <strong>${product.name}</strong>
+                <div>₪${product.price}</div>
+            </div>
+
+            <button class="remove">
+                ✕
+            </button>
+        `;
+
+        item.querySelector(".remove").onclick = () => {
+
+            cart.splice(index, 1);
+
+            localStorage.setItem(
+                "print3dCart",
+                JSON.stringify(cart)
+            );
+
+            updateCart();
+        };
+
+        container.appendChild(item);
+    });
+
+    updatePrices();
+}
+
+
+// ================================
+// טיפ + קופון
+// ================================
+
+let couponApplied = false;
+
+function updatePrices() {
+
+    const subtotal =
+        cart.reduce(
+            (sum, product) => sum + product.price,
+            0
+        );
+
+    const tipSelect = document.getElementById("tip");
+
+    const tipPercent =
+        tipSelect ? Number(tipSelect.value) : 0;
+
+    const tip =
+        Math.round(subtotal * tipPercent / 100);
+
+    const discount =
+        couponApplied ? subtotal : 0;
 
     const total =
         Math.max(
             0,
-            sub - discount + tip
+            subtotal - discount + tip
         );
 
+    const subtotalElement =
+        document.getElementById("subtotal");
 
-    document.getElementById(
-        "subtotal"
-    ).textContent = sub;
+    const discountElement =
+        document.getElementById("discount");
 
+    const tipElement =
+        document.getElementById("tipAmount");
 
-    document.getElementById(
-        "discount"
-    ).textContent = discount;
+    const totalElement =
+        document.getElementById("total");
 
+    if (subtotalElement)
+        subtotalElement.textContent = subtotal;
 
-    document.getElementById(
-        "tipAmount"
-    ).textContent = tip;
+    if (discountElement)
+        discountElement.textContent = discount;
 
+    if (tipElement)
+        tipElement.textContent = tip;
 
-    document.getElementById(
-        "total"
-    ).textContent = total;
-
+    if (totalElement)
+        totalElement.textContent = total;
 }
 
 
-// ======================================
-// עגלה
-// ======================================
+// ================================
+// קופון
+// ================================
+
+const COUPON = "5839210476";
+
+const applyCoupon =
+    document.getElementById("applyCoupon");
+
+if (applyCoupon) {
+
+    applyCoupon.onclick = () => {
+
+        const input =
+            document.getElementById("coupon");
+
+        const message =
+            document.getElementById("couponMessage");
+
+        if (!input || !message) return;
+
+        if (input.value.trim() === COUPON) {
+
+            couponApplied = true;
+
+            message.textContent =
+                "✅ הקופון הופעל! 100% הנחה";
+
+        } else {
+
+            couponApplied = false;
+
+            message.textContent =
+                "❌ קוד קופון לא נכון";
+        }
+
+        updatePrices();
+    };
+}
+
+
+// ================================
+// טיפ
+// ================================
+
+const tip =
+    document.getElementById("tip");
+
+if (tip) {
+    tip.addEventListener(
+        "change",
+        updatePrices
+    );
+}
+
+
+// ================================
+// פתיחת עגלה
+// ================================
 
 function openCart() {
 
     document
         .getElementById("cart")
-        ?.classList
-        .add("open");
+        ?.classList.add("open");
 
     document
         .getElementById("overlay")
-        ?.classList
-        .add("show");
-
+        ?.classList.add("show");
 }
 
+
+// ================================
+// סגירת עגלה
+// ================================
 
 function closeCart() {
 
     document
         .getElementById("cart")
-        ?.classList
-        .remove("open");
+        ?.classList.remove("open");
 
     document
         .getElementById("overlay")
-        ?.classList
-        .remove("show");
-
+        ?.classList.remove("show");
 }
 
 
-// ======================================
-// קופון
-// ======================================
+document
+    .getElementById("openCart")
+    ?.addEventListener(
+        "click",
+        openCart
+    );
 
-function applyCoupon() {
 
-    const input =
-        document.getElementById("coupon");
+document
+    .getElementById("closeCart")
+    ?.addEventListener(
+        "click",
+        closeCart
+    );
 
-    const message =
-        document.getElementById(
-            "couponMessage"
-        );
 
+document
+    .getElementById("overlay")
+    ?.addEventListener(
+        "click",
+        closeCart
+    );
 
-    if (!input || !message) return;
 
+// ================================
+// התחלת האתר
+// ================================
 
-    if (
-        input.value.trim() ===
-        COUPON_CODE
-    ) {
+showProducts(products);
 
-        couponApplied = true;
+showCategories();
 
-        message.textContent =
-            "✅ הקופון הופעל! 100% הנחה";
-
-    } else {
-
-        couponApplied = false;
-
-        message.textContent =
-            "❌ קוד קופון לא תקין";
-
-    }
-
-
-    updateCart();
-
-}
-
-
-// ======================================
-// המשך להזמנה
-// ======================================
-
-function checkout() {
-
-    if (cart.length === 0) {
-
-        alert("העגלה ריקה 🛒");
-
-        return;
-
-    }
-
-
-    closeCart();
-
-
-    const order =
-        document.getElementById("order");
-
-    if (order) {
-
-        order.scrollIntoView({
-            behavior: "smooth"
-        });
-
-    }
-
-}
-
-
-// ======================================
-// WhatsApp
-// ======================================
-
-function sendWhatsApp() {
-
-    if (cart.length === 0) {
-
-        alert("העגלה ריקה 🛒");
-
-        return;
-
-    }
-
-
-    const name =
-        document.getElementById(
-            "name"
-        )?.value.trim() || "";
-
-
-    const phone =
-        document.getElementById(
-            "phone"
-        )?.value.trim() || "";
-
-
-    const note =
-        document.getElementById(
-            "note"
-        )?.value.trim() || "";
-
-
-    let message =
-        "שלום! אני רוצה להזמין מ-Print3D:\n\n";
-
-
-    cart.forEach(product => {
-
-        message +=
-            "• " +
-            product.name +
-            " - ₪" +
-            product.price +
-            "\n";
-
-    });
-
-
-    const sub = subtotal();
-
-    const discount = getDiscount();
-
-    const tip = getTip();
-
-    const total =
-        Math.max(
-            0,
-            sub - discount + tip
-        );
-
-
-    message +=
-        "\nמחיר מוצרים: ₪" +
-        sub;
-
-
-    message +=
-        "\nהנחה: ₪" +
-        discount;
-
-
-    message +=
-        "\nטיפ: ₪" +
-        tip;
-
-
-    message +=
-        "\nסה״כ: ₪" +
-        total;
-
-
-    if (name) {
-        message +=
-            "\n\nשם: " + name;
-    }
-
-
-    if (phone) {
-        message +=
-            "\nטלפון: " + phone;
-    }
-
-
-    if (note) {
-        message +=
-            "\nהערה: " + note;
-    }
-
-
-    const url =
-        "https://wa.me/" +
-        WHATSAPP +
-        "?text=" +
-        encodeURIComponent(message);
-
-
-    window.open(url, "_blank");
-
-}
-
-
-// ======================================
-// עמוד מוצר
-// ======================================
-
-function renderProductPage() {
-
-    const container =
-        document.getElementById(
-            "productDetails"
-        );
-
-    if (!container) return;
-
-
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
-
-
-    const id =
-        Number(
-            params.get("id")
-        );
-
-
-    const product =
-        products.find(
-            p => p.id === id
-        );
-
-
-    if (!product) {
-
-        container.innerHTML =
-            `<div class="empty">
-                😕 המוצר לא נמצא
-            </div>`;
-
-        return;
-
-    }
-
-
-    document.title =
-        product.name +
-        " | Print3D";
-
-
-    container.innerHTML = `
-
-        <div class="product-detail">
-
-            <div class="detail-image">
-
-                <img
-                    src="${product.image}"
-                    alt="${product.name}"
-                >
-
-            </div>
-
-            <div class="detail-info">
-
-                <div class="badge">
-                    ${product.category}
-                </div>
-
-                <h1>
-                    ${product.name}
-                </h1>
-
-                <div class="detail-price">
-                    ₪${product.price}
-                </div>
-
-                <p class="detail-description">
-                    ${product.description}
-                </p>
-
-                <button
-                    id="detailAdd"
-                    class="add"
-                >
-                    🛒 הוסף לעגלה
-                </button>
-
-            </div>
-
-        </div>
-
-    `;
-
-
-    document
-        .getElementById("detailAdd")
-        .onclick = () => {
-
-            addToCart(product.id);
-
-        };
-
-}
-
-
-// ======================================
-// הפעלה
-// ======================================
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-        loadCart();
-
-        renderCategories();
-
-        renderProducts();
-
-        renderProductPage();
-
-        updateCart();
-
-
-        document
-            .getElementById("openCart")
-            ?.addEventListener(
-                "click",
-                openCart
-            );
-
-
-        document
-            .getElementById("closeCart")
-            ?.addEventListener(
-                "click",
-                closeCart
-            );
-
-
-        document
-            .getElementById("overlay")
-            ?.addEventListener(
-                "click",
-                closeCart
-            );
-
-
-        document
-            .getElementById("search")
-            ?.addEventListener(
-                "input",
-                renderProducts
-            );
-
-
-        document
-            .getElementById("tip")
-            ?.addEventListener(
-                "change",
-                updateCart
-            );
-
-
-        document
-            .getElementById("applyCoupon")
-            ?.addEventListener(
-                "click",
-                applyCoupon
-            );
-
-
-        document
-            .getElementById("checkout")
-            ?.addEventListener(
-                "click",
-                checkout
-            );
-
-
-        document
-            .getElementById("sendWhatsApp")
-            ?.addEventListener(
-                "click",
-                sendWhatsApp
-            );
-
-    }
-);
+updateCart();
